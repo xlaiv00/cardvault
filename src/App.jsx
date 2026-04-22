@@ -79,10 +79,10 @@ const SETS = [
 ];
 
 const SET_COLORS = {
-  "Base Set":"#e85d04","Base Set Shadowless":"#f59e0b","Jungle":"#16a34a",
+  "Base Set":"#ef4444","Base Set Shadowless":"#f59e0b","Jungle":"#16a34a",
   "Fossil":"#78716c","Team Rocket":"#7c3aed","Neo Genesis":"#0ea5e9",
   "Hidden Fates":"#ec4899","Shining Fates":"#8b5cf6","Celebrations":"#f59e0b",
-  "Evolving Skies":"#6366f1","Brilliant Stars":"#c9a84c","151":"#e11d48",
+  "Evolving Skies":"#6366f1","Brilliant Stars":"#f59e0b","151":"#e11d48",
   "Prismatic Evolutions":"#a855f7","Scarlet & Violet":"#dc2626",
   "Crown Zenith":"#ca8a04","Base Set 2":"#ea580c",
 };
@@ -104,20 +104,20 @@ const holdDays    = c => {
 };
 
 const SC = {
-  sold:     { bg:"#1a2f3a", fg:"#3a7bd5" },
-  listed:   { bg:"#2a1a0e", fg:"#c9a84c" },
-  holding:  { bg:"#1a2a1a", fg:"#5de08a" },
-  grading:  { bg:"#1e1230", fg:"#9333ea" },
-  preparing:{ bg:"#222222", fg:"#888" },
-  "in transit":{ bg:"#2a1a0e", fg:"#c9a84c" },
-  delivered:{ bg:"#1a2f3a", fg:"#3a7bd5" },
+  sold:     { bg:"#dbeafe", fg:"#1d4ed8" },
+  listed:   { bg:"#fef3c7", fg:"#b45309" },
+  holding:  { bg:"#d1fae5", fg:"#047857" },
+  grading:  { bg:"#ede9fe", fg:"#6d28d9" },
+  preparing:{ bg:"#e8e8e8", fg:"#6b7280" },
+  "in transit":{ bg:"#fef3c7", fg:"#f59e0b" },
+  delivered:{ bg:"#dbeafe", fg:"#3b82f6" },
 };
 
-const BASE_INP = { width:"100%", background:"#121212", border:"1px solid #2e2e2e", borderRadius:8, padding:"9px 12px", color:"#f0ebe0", fontSize:14, outline:"none", boxSizing:"border-box" };
-const BASE_LBL = { display:"block", fontSize:10, color:"#777", letterSpacing:"0.1em", textTransform:"uppercase", marginBottom:5, fontFamily:"'DM Sans',sans-serif" };
+const BASE_INP = { width:"100%", background:"#f0eae2", border:"1px solid #e0d5c8", borderRadius:8, padding:"9px 12px", color:"#2d2318", fontSize:14, outline:"none", boxSizing:"border-box" };
+const BASE_LBL = { display:"block", fontSize:10, color:"#8a7a68", letterSpacing:"0.1em", textTransform:"uppercase", marginBottom:5, fontFamily:"'DM Sans',sans-serif" };
 const NUM      = { fontFamily:"'IBM Plex Mono',monospace", fontWeight:500 };
-const CARD     = { background:"#181818", border:"1px solid #2e2e2e", borderRadius:14, padding:"20px 20px 14px" };
-const SH_STYLE = { fontFamily:"'Syne',sans-serif", fontSize:13, fontWeight:600, color:"#c9a84c", marginBottom:14 };
+const CARD     = { background:"#ffffff", border:"1px solid #e0d5c8", borderRadius:14, padding:"20px 20px 14px" };
+const SH_STYLE = { fontFamily:"'Syne',sans-serif", fontSize:13, fontWeight:600, color:"#d97706", marginBottom:14 };
 
 // ── PERSISTENCE ───────────────────────────────────────────────────────────────
 const LS = "cardvault_data_v1";
@@ -175,8 +175,24 @@ const LOGISTICS0 = [
   {id:3,cardId:10,set:"Celebrations",name:"Pikachu",carrier:"PSA Vault",trackingNo:"PSA-2024-88776",from:"Prague, CZ",to:"PSA Grading, US",status:"in transit",sent:"2024-04-15",eta:"2024-07-15",arrived:"",cost:35,insured:true,insuredValue:150,notes:"Grading submission, ~90 day turnaround"},
 ];
 
+// ── POKÉBALL ICON ─────────────────────────────────────────────────────────────
+function PokeBall({ size=20 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" style={{display:"inline-block",verticalAlign:"middle",flexShrink:0}}>
+      <circle cx="20" cy="20" r="19" fill="#ef4444" stroke="#333" strokeWidth="2"/>
+      <path d="M1 20 H39" stroke="#333" strokeWidth="2"/>
+      <rect x="1" y="16" width="38" height="8" fill="white"/>
+      <path d="M1 20 H39" stroke="#333" strokeWidth="2"/>
+      <circle cx="20" cy="20" r="19" fill="none" stroke="#333" strokeWidth="2"/>
+      <circle cx="20" cy="20" r="6" fill="white" stroke="#333" strokeWidth="2"/>
+      <circle cx="20" cy="20" r="3" fill="#ef4444" stroke="#333" strokeWidth="1.5"/>
+      <circle cx="20" cy="20" r="1.5" fill="white"/>
+    </svg>
+  );
+}
+
 // ── PASSWORD AUTH ─────────────────────────────────────────────────────────────
-const ADMIN_PASS  = "cardvault2024";
+const ADMIN_PASS  = "testing1234";
 const VIEWER_PASS = "viewonly";
 
 function LoginScreen({ onAuth }) {
@@ -186,23 +202,23 @@ function LoginScreen({ onAuth }) {
     setShake(true);setErr("Incorrect password");setPw(""); setTimeout(()=>setShake(false),500);
   }
   return (
-    <div style={{ minHeight:"100vh", background:"#0d0d0d", display:"flex", alignItems:"center", justifyContent:"center", flexDirection:"column", gap:28 }}>
+    <div style={{ minHeight:"100vh", background:"#f5f0eb", display:"flex", alignItems:"center", justifyContent:"center", flexDirection:"column", gap:28 }}>
       <style>{`@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}`}</style>
       <div style={{ textAlign:"center" }}>
         <div style={{ display:"flex", alignItems:"center", gap:8, justifyContent:"center", marginBottom:6 }}>
-          <div style={{ fontSize:24 }}>🃏</div>
-          <span style={{ fontFamily:"'Syne',sans-serif", fontSize:16, fontWeight:700, color:"#c9a84c", letterSpacing:"0.06em" }}>CARD VAULT</span>
+          <PokeBall size={28}/>
+          <span style={{ fontFamily:"'Syne',sans-serif", fontSize:16, fontWeight:700, color:"#f59e0b", letterSpacing:"0.06em" }}>CARD VAULT</span>
         </div>
-        <div style={{ fontSize:12, color:"#444" }}>Pokémon Card Portfolio Tracker</div>
+        <div style={{ fontSize:12, color:"#b0a090" }}>Pokémon Card Portfolio Tracker</div>
       </div>
       <div style={{ animation:shake?"shake 0.4s ease":"none", display:"flex", flexDirection:"column", gap:12, width:280 }}>
         <div style={{ position:"relative" }}>
           <input type={show?"text":"password"} value={pw} onChange={e=>{setPw(e.target.value);setErr("");}} onKeyDown={e=>e.key==="Enter"&&tryLogin()} autoFocus placeholder="Password"
-            style={{ width:"100%", background:"#181818", border:`1px solid ${err?"#e85d04":"#2e2e2e"}`, borderRadius:10, padding:"12px 44px 12px 16px", color:"#f0ebe0", fontSize:14, outline:"none", boxSizing:"border-box" }}/>
-          <button onClick={()=>setShow(s=>!s)} style={{ position:"absolute", right:12, top:"50%", transform:"translateY(-50%)", background:"none", border:"none", color:"#555", cursor:"pointer", fontSize:14, padding:0 }}>{show?"🙈":"👁"}</button>
+            style={{ width:"100%", background:"#ffffff", border:`1px solid ${err?"#ef4444":"#d1c4b4"}`, borderRadius:10, padding:"12px 44px 12px 16px", color:"#2d2318", fontSize:14, outline:"none", boxSizing:"border-box" }}/>
+          <button onClick={()=>setShow(s=>!s)} style={{ position:"absolute", right:12, top:"50%", transform:"translateY(-50%)", background:"none", border:"none", color:"#9a8a78", cursor:"pointer", fontSize:14, padding:0 }}>{show?"🙈":"👁"}</button>
         </div>
-        {err&&<div style={{ fontFamily:"'IBM Plex Mono',monospace", fontSize:11, color:"#e85d04", textAlign:"center" }}>{err}</div>}
-        <button onClick={tryLogin} style={{ background:"#c9a84c", border:"none", borderRadius:10, padding:"11px", color:"#0d0d0d", fontWeight:700, fontSize:14, cursor:"pointer", fontFamily:"'Syne',sans-serif" }}>Enter</button>
+        {err&&<div style={{ fontFamily:"'IBM Plex Mono',monospace", fontSize:11, color:"#ef4444", textAlign:"center" }}>{err}</div>}
+        <button onClick={tryLogin} style={{ background:"#f59e0b", border:"none", borderRadius:10, padding:"11px", color:"#f5f0eb", fontWeight:700, fontSize:14, cursor:"pointer", fontFamily:"'Syne',sans-serif" }}>Enter</button>
       </div>
     </div>
   );
@@ -216,20 +232,20 @@ function SetSelect({ value, onChange }) {
   const sel=SETS.find(s=>s.n===value);
   return (
     <div ref={ref} style={{ position:"relative" }}>
-      <div onClick={()=>setOpen(o=>!o)} style={{ ...BASE_INP, cursor:"pointer", display:"flex", justifyContent:"space-between", alignItems:"center", color:value?"#f0ebe0":"#555" }}>
+      <div onClick={()=>setOpen(o=>!o)} style={{ ...BASE_INP, cursor:"pointer", display:"flex", justifyContent:"space-between", alignItems:"center", color:value?"#2d2318":"#9a8a78" }}>
         <span>{sel?`${sel.f} ${sel.n}`:"Select set…"}</span>
-        <span style={{ color:"#555", fontSize:10 }}>{open?"▲":"▼"}</span>
+        <span style={{ color:"#9a8a78", fontSize:10 }}>{open?"▲":"▼"}</span>
       </div>
       {open&&(
-        <div style={{ position:"absolute", top:"calc(100% + 4px)", left:0, right:0, zIndex:999, background:"#181818", border:"1px solid #2e2e2e", borderRadius:10, boxShadow:"0 20px 50px rgba(0,0,0,0.7)", overflow:"hidden" }}>
+        <div style={{ position:"absolute", top:"calc(100% + 4px)", left:0, right:0, zIndex:999, background:"#ffffff", border:"1px solid #e0d5c8", borderRadius:10, boxShadow:"0 20px 50px rgba(0,0,0,0.7)", overflow:"hidden" }}>
           <div style={{ padding:"8px 10px", borderBottom:"1px solid #222" }}>
             <input autoFocus value={q} onChange={e=>setQ(e.target.value)} placeholder="Search set…" style={{ ...BASE_INP, fontSize:13, padding:"6px 10px" }}/>
           </div>
           <div style={{ maxHeight:220, overflowY:"auto" }}>
             {filtered.map(s=>(
               <div key={s.n} onClick={()=>{onChange(s.n);setOpen(false);setQ("");}}
-                style={{ padding:"9px 14px", cursor:"pointer", fontSize:13, display:"flex", gap:8, color:value===s.n?"#c9a84c":"#ccc" }}
-                onMouseEnter={e=>e.currentTarget.style.background="#222"}
+                style={{ padding:"9px 14px", cursor:"pointer", fontSize:13, display:"flex", gap:8, color:value===s.n?"#f59e0b":"#4a3a2a" }}
+                onMouseEnter={e=>e.currentTarget.style.background="#e8ddd3"}
                 onMouseLeave={e=>e.currentTarget.style.background="transparent"}>
                 <span>{s.f}</span><span>{s.n}</span>
               </div>
@@ -244,22 +260,22 @@ function SetSelect({ value, onChange }) {
 // ── SHARED UI ─────────────────────────────────────────────────────────────────
 function Kpi({ label, value, sub, accent, small, highlight }) {
   return (
-    <div style={{ ...CARD, padding:"18px 20px", background:highlight?"#1a1808":"#181818", borderColor:highlight?"#3a3010":"#2e2e2e" }}>
-      <div style={{ fontSize:10, color:"#555", textTransform:"uppercase", letterSpacing:"0.12em", marginBottom:7 }}>{label}</div>
-      <div style={{ ...NUM, fontSize:small?17:22, color:accent||"#f0ebe0", lineHeight:1, letterSpacing:"-0.02em" }}>{value}</div>
-      {sub&&<div style={{ fontSize:11, color:"#555", marginTop:5 }}>{sub}</div>}
+    <div style={{ ...CARD, padding:"18px 20px", background:highlight?"#fffbeb":"#ffffff", borderColor:highlight?"#fde68a":"#e0d5c8" }}>
+      <div style={{ fontSize:10, color:"#9a8a78", textTransform:"uppercase", letterSpacing:"0.12em", marginBottom:7 }}>{label}</div>
+      <div style={{ ...NUM, fontSize:small?17:22, color:accent||"#2d2318", lineHeight:1, letterSpacing:"-0.02em" }}>{value}</div>
+      {sub&&<div style={{ fontSize:11, color:"#9a8a78", marginTop:5 }}>{sub}</div>}
     </div>
   );
 }
-function Stars({ n }) { return <span>{[1,2,3,4,5].map(i=><span key={i} style={{ color:i<=n?"#c9a84c":"#222", fontSize:12 }}>★</span>)}</span>; }
+function Stars({ n }) { return <span>{[1,2,3,4,5].map(i=><span key={i} style={{ color:i<=n?"#f59e0b":"#e8ddd3", fontSize:12 }}>★</span>)}</span>; }
 function Badge({ status }) { const s=SC[status]||SC.listed; return <span style={{ fontSize:10, padding:"2px 8px", borderRadius:20, background:s.bg, color:s.fg, whiteSpace:"nowrap" }}>{status}</span>; }
-function TH({ children }) { return <th style={{ padding:"10px 14px", textAlign:"left", color:"#555", fontWeight:500, fontSize:10, textTransform:"uppercase", letterSpacing:"0.08em" }}>{children}</th>; }
-function TD({ children, mono, accent, dim, bold }) { return <td style={{ padding:"10px 14px", ...(mono?NUM:{}), color:accent||(dim?"#666":"#ccc"), fontWeight:bold?600:400, fontSize:mono?11:12 }}>{children}</td>; }
+function TH({ children }) { return <th style={{ padding:"10px 14px", textAlign:"left", color:"#9a8a78", fontWeight:500, fontSize:10, textTransform:"uppercase", letterSpacing:"0.08em" }}>{children}</th>; }
+function TD({ children, mono, accent, dim, bold }) { return <td style={{ padding:"10px 14px", ...(mono?NUM:{}), color:accent||(dim?"#7a6a58":"#4a3a2a"), fontWeight:bold?600:400, fontSize:mono?11:12 }}>{children}</td>; }
 function ChartTip({ active, payload, label }) {
   if(!active||!payload?.length) return null;
-  return <div style={{ background:"#181818", border:"1px solid #2e2e2e", borderRadius:10, padding:"10px 14px", fontSize:12 }}>
-    {label&&<div style={{ color:"#555", marginBottom:4 }}>{label}</div>}
-    {payload.map((p,i)=><div key={i} style={{ ...NUM, color:p.color||"#c9a84c" }}>{p.name}: {typeof p.value==="number"&&Math.abs(p.value)>100?"€"+Number(p.value).toLocaleString("de-DE"):p.value+(p.name?.includes("%")?"%":"")}</div>)}
+  return <div style={{ background:"#ffffff", border:"1px solid #e0d5c8", borderRadius:10, padding:"10px 14px", fontSize:12 }}>
+    {label&&<div style={{ color:"#9a8a78", marginBottom:4 }}>{label}</div>}
+    {payload.map((p,i)=><div key={i} style={{ ...NUM, color:p.color||"#f59e0b" }}>{p.name}: {typeof p.value==="number"&&Math.abs(p.value)>100?"€"+Number(p.value).toLocaleString("de-DE"):p.value+(p.name?.includes("%")?"%":"")}</div>)}
   </div>;
 }
 
@@ -272,11 +288,11 @@ function CardModal({ data, suppliers, onClose, onSave }) {
   const nm=np!==null&&Number(f.cost)>0?np/Number(f.cost):null;
   const handlePhoto=e=>{Array.from(e.target.files).forEach(file=>{const r=new FileReader();r.onload=ev=>setF(p=>({...p,photos:[...(p.photos||[]),{name:file.name,data:ev.target.result}]}));r.readAsDataURL(file);});};
   return (
-    <div style={{ position:"fixed", inset:0, background:"rgba(0,0,0,0.88)", zIndex:1000, display:"flex", alignItems:"center", justifyContent:"center", padding:20 }}>
-      <div style={{ background:"#181818", border:"1px solid #2e2e2e", borderRadius:18, padding:"28px", width:580, maxWidth:"100%", maxHeight:"92vh", overflowY:"auto" }}>
+    <div style={{ position:"fixed", inset:0, background:"rgba(45,35,24,0.85)", zIndex:1000, display:"flex", alignItems:"center", justifyContent:"center", padding:20 }}>
+      <div style={{ background:"#ffffff", border:"1px solid #e0d5c8", borderRadius:18, padding:"28px", width:580, maxWidth:"100%", maxHeight:"92vh", overflowY:"auto" }}>
         <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:20 }}>
           <span style={{ fontFamily:"'Syne',sans-serif", fontSize:17, fontWeight:600 }}>{data?"Edit Card":"Add Card"}</span>
-          <button onClick={onClose} style={{ background:"none", border:"none", color:"#555", fontSize:22, cursor:"pointer" }}>×</button>
+          <button onClick={onClose} style={{ background:"none", border:"none", color:"#9a8a78", fontSize:22, cursor:"pointer" }}>×</button>
         </div>
         <div style={{ marginBottom:12 }}><label style={BASE_LBL}>Set</label><SetSelect value={f.set} onChange={v=>u("set",v)}/></div>
         <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:11 }}>
@@ -292,9 +308,9 @@ function CardModal({ data, suppliers, onClose, onSave }) {
         </div>
         <div style={{ marginTop:11 }}><label style={BASE_LBL}>Market Value (€)</label><input value={f.marketValue||""} onChange={e=>u("marketValue",e.target.value)} type="number" style={BASE_INP} placeholder="Current market estimate"/></div>
         {np!==null&&(
-          <div style={{ background:"#121212", border:"1px solid #2e2e2e", borderRadius:8, padding:"10px 14px", marginTop:10, display:"flex", gap:20 }}>
-            <span style={{ fontSize:12, color:"#777" }}>Net profit: <strong style={{ ...NUM, color:np>=0?"#5de08a":"#e85d04" }}>€{Number(np).toLocaleString("de-DE")}</strong></span>
-            <span style={{ fontSize:12, color:"#777" }}>Margin: <strong style={{ ...NUM, color:"#c9a84c" }}>{nm!==null?pct(nm):"—"}</strong></span>
+          <div style={{ background:"#f0eae2", border:"1px solid #e0d5c8", borderRadius:8, padding:"10px 14px", marginTop:10, display:"flex", gap:20 }}>
+            <span style={{ fontSize:12, color:"#8a7a68" }}>Net profit: <strong style={{ ...NUM, color:np>=0?"#10b981":"#ef4444" }}>€{Number(np).toLocaleString("de-DE")}</strong></span>
+            <span style={{ fontSize:12, color:"#8a7a68" }}>Margin: <strong style={{ ...NUM, color:"#f59e0b" }}>{nm!==null?pct(nm):"—"}</strong></span>
           </div>
         )}
         <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:11, marginTop:11 }}>
@@ -310,18 +326,18 @@ function CardModal({ data, suppliers, onClose, onSave }) {
           <div style={{ display:"flex", gap:8, flexWrap:"wrap", marginBottom:8 }}>
             {(f.photos||[]).map((p,i)=>(
               <div key={i} style={{ position:"relative" }}>
-                <img src={p.data} alt={p.name} style={{ width:72, height:72, objectFit:"cover", borderRadius:8, border:"1px solid #2e2e2e" }}/>
-                <button onClick={()=>setF(pr=>({...pr,photos:pr.photos.filter((_,j)=>j!==i)}))} style={{ position:"absolute", top:-6, right:-6, background:"#e85d04", border:"none", borderRadius:"50%", width:18, height:18, color:"#fff", fontSize:11, cursor:"pointer", lineHeight:"18px", textAlign:"center" }}>×</button>
+                <img src={p.data} alt={p.name} style={{ width:72, height:72, objectFit:"cover", borderRadius:8, border:"1px solid #e0d5c8" }}/>
+                <button onClick={()=>setF(pr=>({...pr,photos:pr.photos.filter((_,j)=>j!==i)}))} style={{ position:"absolute", top:-6, right:-6, background:"#ef4444", border:"none", borderRadius:"50%", width:18, height:18, color:"#fff", fontSize:11, cursor:"pointer", lineHeight:"18px", textAlign:"center" }}>×</button>
               </div>
             ))}
-            <button onClick={()=>fileRef.current?.click()} style={{ width:72, height:72, borderRadius:8, border:"1px dashed #2e2e2e", background:"#121212", color:"#555", fontSize:22, cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center" }}>+</button>
+            <button onClick={()=>fileRef.current?.click()} style={{ width:72, height:72, borderRadius:8, border:"1px dashed #e0d5c8", background:"#f0eae2", color:"#9a8a78", fontSize:22, cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center" }}>+</button>
           </div>
           <input ref={fileRef} type="file" accept="image/*" multiple onChange={handlePhoto} style={{ display:"none" }}/>
         </div>
         <div style={{ display:"flex", gap:10, marginTop:20, justifyContent:"flex-end" }}>
-          <button onClick={onClose} style={{ background:"none", border:"1px solid #2e2e2e", borderRadius:8, padding:"8px 18px", color:"#666", fontSize:13, cursor:"pointer" }}>Cancel</button>
+          <button onClick={onClose} style={{ background:"none", border:"1px solid #e0d5c8", borderRadius:8, padding:"8px 18px", color:"#7a6a58", fontSize:13, cursor:"pointer" }}>Cancel</button>
           <button onClick={()=>onSave({...f,cost:Number(f.cost),askingPrice:Number(f.askingPrice),gradingCost:Number(f.gradingCost||0),marketValue:Number(f.marketValue||0),id:f.id||Date.now(),tags:typeof f.tags==="string"?f.tags.split(",").map(t=>t.trim()).filter(Boolean):f.tags})}
-            style={{ background:"#c9a84c", border:"none", borderRadius:8, padding:"8px 22px", color:"#0d0d0d", fontWeight:700, fontSize:13, cursor:"pointer" }}>Save</button>
+            style={{ background:"#f59e0b", border:"none", borderRadius:8, padding:"8px 22px", color:"#f5f0eb", fontWeight:700, fontSize:13, cursor:"pointer" }}>Save</button>
         </div>
       </div>
     </div>
@@ -333,11 +349,11 @@ function SupplierModal({ data, onClose, onSave }) {
   const [f,setF]=useState(data?{...data,tags:data.tags?.join(", ")||""}:{name:"",type:"Local Shop",country:"",city:"",email:"",phone:"",reliability:3,avgDiscount:0,notes:"",tags:""});
   const u=(k,v)=>setF(p=>({...p,[k]:v}));
   return (
-    <div style={{ position:"fixed", inset:0, background:"rgba(0,0,0,0.88)", zIndex:1000, display:"flex", alignItems:"center", justifyContent:"center", padding:20 }}>
-      <div style={{ background:"#181818", border:"1px solid #2e2e2e", borderRadius:18, padding:"28px", width:500, maxWidth:"100%", maxHeight:"92vh", overflowY:"auto" }}>
+    <div style={{ position:"fixed", inset:0, background:"rgba(45,35,24,0.85)", zIndex:1000, display:"flex", alignItems:"center", justifyContent:"center", padding:20 }}>
+      <div style={{ background:"#ffffff", border:"1px solid #e0d5c8", borderRadius:18, padding:"28px", width:500, maxWidth:"100%", maxHeight:"92vh", overflowY:"auto" }}>
         <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:20 }}>
           <span style={{ fontFamily:"'Syne',sans-serif", fontSize:17, fontWeight:600 }}>{data?"Edit Supplier":"Add Supplier"}</span>
-          <button onClick={onClose} style={{ background:"none", border:"none", color:"#555", fontSize:22, cursor:"pointer" }}>×</button>
+          <button onClick={onClose} style={{ background:"none", border:"none", color:"#9a8a78", fontSize:22, cursor:"pointer" }}>×</button>
         </div>
         <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:11 }}>
           <div style={{ gridColumn:"span 2" }}><label style={BASE_LBL}>Name</label><input value={f.name} onChange={e=>u("name",e.target.value)} style={BASE_INP}/></div>
@@ -352,9 +368,9 @@ function SupplierModal({ data, onClose, onSave }) {
           <div style={{ gridColumn:"span 2" }}><label style={BASE_LBL}>Notes</label><textarea value={f.notes} onChange={e=>u("notes",e.target.value)} rows={3} style={{ ...BASE_INP, resize:"vertical", fontFamily:"inherit" }}/></div>
         </div>
         <div style={{ display:"flex", gap:10, marginTop:20, justifyContent:"flex-end" }}>
-          <button onClick={onClose} style={{ background:"none", border:"1px solid #2e2e2e", borderRadius:8, padding:"8px 18px", color:"#666", fontSize:13, cursor:"pointer" }}>Cancel</button>
+          <button onClick={onClose} style={{ background:"none", border:"1px solid #e0d5c8", borderRadius:8, padding:"8px 18px", color:"#7a6a58", fontSize:13, cursor:"pointer" }}>Cancel</button>
           <button onClick={()=>onSave({...f,reliability:Number(f.reliability),avgDiscount:Number(f.avgDiscount),id:f.id||Date.now(),tags:f.tags.split(",").map(t=>t.trim()).filter(Boolean)})}
-            style={{ background:"#c9a84c", border:"none", borderRadius:8, padding:"8px 22px", color:"#0d0d0d", fontWeight:700, fontSize:13, cursor:"pointer" }}>Save</button>
+            style={{ background:"#f59e0b", border:"none", borderRadius:8, padding:"8px 22px", color:"#f5f0eb", fontWeight:700, fontSize:13, cursor:"pointer" }}>Save</button>
         </div>
       </div>
     </div>
@@ -366,48 +382,48 @@ function TimelineModal({ card, onClose, onSave }) {
   const [timeline,setTimeline]=useState(card.timeline||[]);
   const [note,setNote]=useState(""); const [type,setType]=useState("note"); const [date,setDate]=useState(new Date().toISOString().slice(0,10));
   const TYPES=["note","offer","bought","sold","grading","received","negotiation"];
-  const TC={note:"#666",offer:"#c9a84c",bought:"#3a7bd5",sold:"#5de08a",grading:"#9333ea",received:"#5de08a",negotiation:"#f59e0b"};
+  const TC={note:"#7a6a58",offer:"#f59e0b",bought:"#3b82f6",sold:"#10b981",grading:"#8b5cf6",received:"#10b981",negotiation:"#f59e0b"};
   const add=()=>{if(!note.trim())return;const e={date,type,note:note.trim()};setTimeline(t=>[...t,e].sort((a,b)=>new Date(a.date)-new Date(b.date)));setNote("");};
   return (
-    <div style={{ position:"fixed", inset:0, background:"rgba(0,0,0,0.88)", zIndex:1000, display:"flex", alignItems:"center", justifyContent:"center", padding:20 }}>
-      <div style={{ background:"#181818", border:"1px solid #2e2e2e", borderRadius:18, padding:"28px", width:560, maxWidth:"100%", maxHeight:"92vh", overflowY:"auto" }}>
+    <div style={{ position:"fixed", inset:0, background:"rgba(45,35,24,0.85)", zIndex:1000, display:"flex", alignItems:"center", justifyContent:"center", padding:20 }}>
+      <div style={{ background:"#ffffff", border:"1px solid #e0d5c8", borderRadius:18, padding:"28px", width:560, maxWidth:"100%", maxHeight:"92vh", overflowY:"auto" }}>
         <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:20 }}>
           <div>
             <div style={{ fontFamily:"'Syne',sans-serif", fontSize:17, fontWeight:600 }}>Note Timeline</div>
-            <div style={{ fontSize:11, color:"#666", marginTop:2 }}>{card.name} · {card.set} · {card.cardNo}</div>
+            <div style={{ fontSize:11, color:"#7a6a58", marginTop:2 }}>{card.name} · {card.set} · {card.cardNo}</div>
           </div>
-          <button onClick={onClose} style={{ background:"none", border:"none", color:"#555", fontSize:22, cursor:"pointer" }}>×</button>
+          <button onClick={onClose} style={{ background:"none", border:"none", color:"#9a8a78", fontSize:22, cursor:"pointer" }}>×</button>
         </div>
         <div style={{ display:"flex", flexDirection:"column", gap:0, marginBottom:20 }}>
-          {timeline.length===0&&<div style={{ color:"#555", fontSize:12, padding:"20px 0" }}>No entries yet.</div>}
+          {timeline.length===0&&<div style={{ color:"#9a8a78", fontSize:12, padding:"20px 0" }}>No entries yet.</div>}
           {[...timeline].reverse().map((e,i,arr)=>(
             <div key={i} style={{ display:"flex", gap:14, paddingBottom:16 }}>
               <div style={{ display:"flex", flexDirection:"column", alignItems:"center", flexShrink:0 }}>
-                <div style={{ width:9, height:9, borderRadius:"50%", background:TC[e.type]||"#555", marginTop:2 }}/>
-                {i<arr.length-1&&<div style={{ width:1, flex:1, background:"#1e1e1e", marginTop:4 }}/>}
+                <div style={{ width:9, height:9, borderRadius:"50%", background:TC[e.type]||"#9a8a78", marginTop:2 }}/>
+                {i<arr.length-1&&<div style={{ width:1, flex:1, background:"#ece6df", marginTop:4 }}/>}
               </div>
               <div style={{ flex:1 }}>
                 <div style={{ display:"flex", gap:8, alignItems:"center", marginBottom:2 }}>
-                  <span style={{ fontSize:10, padding:"1px 7px", borderRadius:20, background:"#1e1e1e", color:TC[e.type]||"#555" }}>{e.type}</span>
-                  <span style={{ fontFamily:"'IBM Plex Mono',monospace", fontSize:10, color:"#444" }}>{e.date}</span>
+                  <span style={{ fontSize:10, padding:"1px 7px", borderRadius:20, background:"#ece6df", color:TC[e.type]||"#9a8a78" }}>{e.type}</span>
+                  <span style={{ fontFamily:"'IBM Plex Mono',monospace", fontSize:10, color:"#b0a090" }}>{e.date}</span>
                 </div>
-                <div style={{ fontSize:12, color:"#bbb" }}>{e.note}</div>
+                <div style={{ fontSize:12, color:"#5a4a38" }}>{e.note}</div>
               </div>
-              <button onClick={()=>setTimeline(t=>t.filter((_,j)=>j!==timeline.length-1-i))} style={{ background:"none", border:"none", color:"#333", fontSize:16, cursor:"pointer", alignSelf:"flex-start" }}>×</button>
+              <button onClick={()=>setTimeline(t=>t.filter((_,j)=>j!==timeline.length-1-i))} style={{ background:"none", border:"none", color:"#c0b0a0", fontSize:16, cursor:"pointer", alignSelf:"flex-start" }}>×</button>
             </div>
           ))}
         </div>
-        <div style={{ borderTop:"1px solid #2e2e2e", paddingTop:16 }}>
+        <div style={{ borderTop:"1px solid #e0d5c8", paddingTop:16 }}>
           <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10, marginBottom:10 }}>
             <div><label style={BASE_LBL}>Type</label><select value={type} onChange={e=>setType(e.target.value)} style={BASE_INP}>{TYPES.map(t=><option key={t}>{t}</option>)}</select></div>
             <div><label style={BASE_LBL}>Date</label><input value={date} onChange={e=>setDate(e.target.value)} type="date" style={BASE_INP}/></div>
           </div>
           <div style={{ marginBottom:10 }}><label style={BASE_LBL}>Note</label><input value={note} onChange={e=>setNote(e.target.value)} onKeyDown={e=>e.key==="Enter"&&add()} placeholder="Offer received €250, buyer from Berlin…" style={BASE_INP}/></div>
-          <button onClick={add} style={{ background:"#222", border:"1px solid #2e2e2e", borderRadius:8, padding:"8px 16px", color:"#c9a84c", fontSize:13, cursor:"pointer", width:"100%" }}>+ Add Entry</button>
+          <button onClick={add} style={{ background:"#e8ddd3", border:"1px solid #e0d5c8", borderRadius:8, padding:"8px 16px", color:"#f59e0b", fontSize:13, cursor:"pointer", width:"100%" }}>+ Add Entry</button>
         </div>
         <div style={{ display:"flex", gap:10, marginTop:16, justifyContent:"flex-end" }}>
-          <button onClick={onClose} style={{ background:"none", border:"1px solid #2e2e2e", borderRadius:8, padding:"8px 18px", color:"#666", fontSize:13, cursor:"pointer" }}>Cancel</button>
-          <button onClick={()=>onSave({...card,timeline})} style={{ background:"#c9a84c", border:"none", borderRadius:8, padding:"8px 22px", color:"#0d0d0d", fontWeight:700, fontSize:13, cursor:"pointer" }}>Save</button>
+          <button onClick={onClose} style={{ background:"none", border:"1px solid #e0d5c8", borderRadius:8, padding:"8px 18px", color:"#7a6a58", fontSize:13, cursor:"pointer" }}>Cancel</button>
+          <button onClick={()=>onSave({...card,timeline})} style={{ background:"#f59e0b", border:"none", borderRadius:8, padding:"8px 22px", color:"#f5f0eb", fontWeight:700, fontSize:13, cursor:"pointer" }}>Save</button>
         </div>
       </div>
     </div>
@@ -420,78 +436,78 @@ function CardDrawer({ card, suppliers, onClose, onEdit, onDuplicate, onDelete })
   const np=card.askingPrice-card.cost-(card.gradingCost||0);
   const nm=card.cost>0?np/card.cost:0;
   const hd=holdDays(card);
-  const TC={note:"#666",offer:"#c9a84c",bought:"#3a7bd5",sold:"#5de08a",grading:"#9333ea",received:"#5de08a",negotiation:"#f59e0b"};
+  const TC={note:"#7a6a58",offer:"#f59e0b",bought:"#3b82f6",sold:"#10b981",grading:"#8b5cf6",received:"#10b981",negotiation:"#f59e0b"};
   return (
     <div style={{ position:"fixed", inset:0, zIndex:500, display:"flex" }} onClick={onClose}>
       <div style={{ flex:1 }}/>
-      <div onClick={e=>e.stopPropagation()} style={{ width:420, maxWidth:"95vw", height:"100vh", background:"#141414", borderLeft:"1px solid #2e2e2e", overflowY:"auto" }}>
-        <div style={{ padding:"20px 22px 16px", borderBottom:"1px solid #1e1e1e", position:"sticky", top:0, background:"#141414", zIndex:10 }}>
+      <div onClick={e=>e.stopPropagation()} style={{ width:420, maxWidth:"95vw", height:"100vh", background:"#f8f3ee", borderLeft:"1px solid #e0d5c8", overflowY:"auto" }}>
+        <div style={{ padding:"20px 22px 16px", borderBottom:"1px solid #ece6df", position:"sticky", top:0, background:"#f8f3ee", zIndex:10 }}>
           <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start" }}>
             <div>
               <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:4 }}>
-                <span style={{ fontSize:18 }}>{SETS.find(s=>s.n===card.set)?.f||"🃏"}</span>
+                <span style={{ fontSize:18 }}>{SETS.find(s=>s.n===card.set)?.f||"⚡"}</span>
                 <span style={{ fontFamily:"'Syne',sans-serif", fontSize:17, fontWeight:700 }}>{card.name}</span>
               </div>
-              <div style={{ fontSize:13, color:"#888", marginBottom:3 }}>{card.set}</div>
+              <div style={{ fontSize:13, color:"#9a8a78", marginBottom:3 }}>{card.set}</div>
               <div style={{ display:"flex", gap:8, flexWrap:"wrap" }}>
-                <span style={{ fontFamily:"'IBM Plex Mono',monospace", fontSize:11, color:"#666" }}>{card.cardNo}</span>
-                <span style={{ fontSize:11, color:"#555" }}>·</span>
-                <span style={{ fontFamily:"'IBM Plex Mono',monospace", fontSize:11, color:"#666" }}>{card.year}</span>
-                <span style={{ fontSize:11, color:"#555" }}>·</span>
-                <span style={{ fontSize:11, color:"#9333ea" }}>{card.grade}</span>
+                <span style={{ fontFamily:"'IBM Plex Mono',monospace", fontSize:11, color:"#7a6a58" }}>{card.cardNo}</span>
+                <span style={{ fontSize:11, color:"#9a8a78" }}>·</span>
+                <span style={{ fontFamily:"'IBM Plex Mono',monospace", fontSize:11, color:"#7a6a58" }}>{card.year}</span>
+                <span style={{ fontSize:11, color:"#9a8a78" }}>·</span>
+                <span style={{ fontSize:11, color:"#8b5cf6" }}>{card.grade}</span>
               </div>
             </div>
-            <button onClick={onClose} style={{ background:"none", border:"none", color:"#555", fontSize:22, cursor:"pointer" }}>×</button>
+            <button onClick={onClose} style={{ background:"none", border:"none", color:"#9a8a78", fontSize:22, cursor:"pointer" }}>×</button>
           </div>
           <div style={{ display:"flex", gap:8, marginTop:12 }}>
-            <button onClick={onEdit} style={{ background:"#c9a84c", border:"none", borderRadius:8, padding:"6px 14px", color:"#0d0d0d", fontWeight:700, fontSize:12, cursor:"pointer" }}>Edit</button>
-            <button onClick={onDuplicate} style={{ background:"none", border:"1px solid #2e2e2e", borderRadius:8, padding:"6px 14px", color:"#888", fontSize:12, cursor:"pointer" }}>Duplicate</button>
-            <button onClick={onDelete} style={{ background:"none", border:"1px solid #3a1a1a", borderRadius:8, padding:"6px 14px", color:"#e85d04", fontSize:12, cursor:"pointer", marginLeft:"auto" }}>🗑 Delete</button>
+            <button onClick={onEdit} style={{ background:"#f59e0b", border:"none", borderRadius:8, padding:"6px 14px", color:"#f5f0eb", fontWeight:700, fontSize:12, cursor:"pointer" }}>Edit</button>
+            <button onClick={onDuplicate} style={{ background:"none", border:"1px solid #e0d5c8", borderRadius:8, padding:"6px 14px", color:"#9a8a78", fontSize:12, cursor:"pointer" }}>Duplicate</button>
+            <button onClick={onDelete} style={{ background:"none", border:"1px solid #3a1a1a", borderRadius:8, padding:"6px 14px", color:"#ef4444", fontSize:12, cursor:"pointer", marginLeft:"auto" }}>🗑 Delete</button>
           </div>
         </div>
         <div style={{ padding:"20px 22px", display:"flex", flexDirection:"column", gap:20 }}>
           {card.photos?.length>0&&(
             <div>
-              <div style={{ fontSize:10, color:"#555", textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:10 }}>Photos</div>
-              <div style={{ display:"flex", gap:8, flexWrap:"wrap" }}>{card.photos.map((p,i)=><img key={i} src={p.data} alt="" style={{ width:90, height:90, objectFit:"cover", borderRadius:8, border:"1px solid #2e2e2e" }}/>)}</div>
+              <div style={{ fontSize:10, color:"#9a8a78", textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:10 }}>Photos</div>
+              <div style={{ display:"flex", gap:8, flexWrap:"wrap" }}>{card.photos.map((p,i)=><img key={i} src={p.data} alt="" style={{ width:90, height:90, objectFit:"cover", borderRadius:8, border:"1px solid #e0d5c8" }}/>)}</div>
             </div>
           )}
           <div>
-            <div style={{ fontSize:10, color:"#555", textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:10 }}>Financials</div>
+            <div style={{ fontSize:10, color:"#9a8a78", textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:10 }}>Financials</div>
             <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:8 }}>
-              {[["Buy Cost",`€${card.cost.toLocaleString("de-DE")}`,"#f0ebe0"],["Asking Price",`€${card.askingPrice.toLocaleString("de-DE")}`,"#c9a84c"],["Grading Cost",card.gradingCost?`€${card.gradingCost.toLocaleString("de-DE")}`:"—","#9333ea"],["Net Profit",`€${np.toLocaleString("de-DE")}`,np>=0?"#5de08a":"#e85d04"],["Margin",pct(nm),nm>=0.15?"#5de08a":nm>=0.05?"#c9a84c":"#e85d04"],["Market Value",card.marketValue?`€${card.marketValue.toLocaleString("de-DE")}`:"—","#3a7bd5"]].map(([l,v,c])=>(
-                <div key={l} style={{ background:"#1a1a1a", borderRadius:8, padding:"10px 12px" }}>
-                  <div style={{ fontSize:10, color:"#555", marginBottom:4 }}>{l}</div>
+              {[["Buy Cost",`€${card.cost.toLocaleString("de-DE")}`,"#2d2318"],["Asking Price",`€${card.askingPrice.toLocaleString("de-DE")}`,"#f59e0b"],["Grading Cost",card.gradingCost?`€${card.gradingCost.toLocaleString("de-DE")}`:"—","#8b5cf6"],["Net Profit",`€${np.toLocaleString("de-DE")}`,np>=0?"#10b981":"#ef4444"],["Margin",pct(nm),nm>=0.15?"#10b981":nm>=0.05?"#f59e0b":"#ef4444"],["Market Value",card.marketValue?`€${card.marketValue.toLocaleString("de-DE")}`:"—","#3b82f6"]].map(([l,v,c])=>(
+                <div key={l} style={{ background:"#ece4d8", borderRadius:8, padding:"10px 12px" }}>
+                  <div style={{ fontSize:10, color:"#9a8a78", marginBottom:4 }}>{l}</div>
                   <div style={{ fontFamily:"'IBM Plex Mono',monospace", fontSize:14, color:c }}>{v}</div>
                 </div>
               ))}
             </div>
           </div>
           <div>
-            <div style={{ fontSize:10, color:"#555", textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:10 }}>Details</div>
+            <div style={{ fontSize:10, color:"#9a8a78", textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:10 }}>Details</div>
             {[["Supplier",sup?.name||"—"],["Date Bought",card.bought||"—"],["Date Sold",card.soldDate||"—"],["Hold Days",hd?hd+"d":"—"],["Tags",(Array.isArray(card.tags)?card.tags:card.tags?.split(",")||[]).filter(Boolean).join(", ")||"—"]].map(([l,v])=>(
               <div key={l} style={{ display:"flex", justifyContent:"space-between", padding:"8px 0", borderBottom:"1px solid #1a1a1a" }}>
-                <span style={{ fontSize:12, color:"#555" }}>{l}</span>
-                <span style={{ fontSize:11, color:"#ccc", fontFamily:"'IBM Plex Mono',monospace" }}>{v}</span>
+                <span style={{ fontSize:12, color:"#9a8a78" }}>{l}</span>
+                <span style={{ fontSize:11, color:"#4a3a2a", fontFamily:"'IBM Plex Mono',monospace" }}>{v}</span>
               </div>
             ))}
           </div>
-          {card.notes&&<div><div style={{ fontSize:10, color:"#555", textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:8 }}>Notes</div><div style={{ fontSize:13, color:"#aaa", lineHeight:1.6, background:"#1a1a1a", borderRadius:8, padding:"12px 14px" }}>{card.notes}</div></div>}
+          {card.notes&&<div><div style={{ fontSize:10, color:"#9a8a78", textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:8 }}>Notes</div><div style={{ fontSize:13, color:"#7a6a58", lineHeight:1.6, background:"#ece4d8", borderRadius:8, padding:"12px 14px" }}>{card.notes}</div></div>}
           {card.timeline?.length>0&&(
             <div>
-              <div style={{ fontSize:10, color:"#555", textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:12 }}>Timeline</div>
+              <div style={{ fontSize:10, color:"#9a8a78", textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:12 }}>Timeline</div>
               {[...card.timeline].reverse().map((e,i,arr)=>(
                 <div key={i} style={{ display:"flex", gap:12, paddingBottom:14 }}>
                   <div style={{ display:"flex", flexDirection:"column", alignItems:"center", flexShrink:0 }}>
-                    <div style={{ width:9, height:9, borderRadius:"50%", background:TC[e.type]||"#555", marginTop:2 }}/>
-                    {i<arr.length-1&&<div style={{ width:1, flex:1, background:"#1e1e1e", marginTop:4 }}/>}
+                    <div style={{ width:9, height:9, borderRadius:"50%", background:TC[e.type]||"#9a8a78", marginTop:2 }}/>
+                    {i<arr.length-1&&<div style={{ width:1, flex:1, background:"#ece6df", marginTop:4 }}/>}
                   </div>
                   <div style={{ flex:1 }}>
                     <div style={{ display:"flex", gap:8, alignItems:"center", marginBottom:2 }}>
-                      <span style={{ fontSize:10, padding:"1px 7px", borderRadius:20, background:"#1e1e1e", color:TC[e.type]||"#555" }}>{e.type}</span>
-                      <span style={{ fontFamily:"'IBM Plex Mono',monospace", fontSize:10, color:"#444" }}>{e.date}</span>
+                      <span style={{ fontSize:10, padding:"1px 7px", borderRadius:20, background:"#ece6df", color:TC[e.type]||"#9a8a78" }}>{e.type}</span>
+                      <span style={{ fontFamily:"'IBM Plex Mono',monospace", fontSize:10, color:"#b0a090" }}>{e.date}</span>
                     </div>
-                    <div style={{ fontSize:12, color:"#bbb" }}>{e.note}</div>
+                    <div style={{ fontSize:12, color:"#5a4a38" }}>{e.note}</div>
                   </div>
                 </div>
               ))}
@@ -548,7 +564,7 @@ All prices in EUR.`,
     <div style={{ display:"flex", flexDirection:"column", gap:16 }}>
       <div>
         <h1 style={{ fontFamily:"'Syne',sans-serif", fontSize:22, fontWeight:700, margin:"0 0 6px" }}>Market Calculator</h1>
-        <div style={{ fontSize:12, color:"#666" }}>Search live prices across eBay, TCGPlayer, CardMarket & PSA registry. Compare against your costs.</div>
+        <div style={{ fontSize:12, color:"#7a6a58" }}>Search live prices across eBay, TCGPlayer, CardMarket & PSA registry. Compare against your costs.</div>
       </div>
       <div style={CARD}>
         <div style={SH_STYLE}>Card + Cost</div>
@@ -559,16 +575,16 @@ All prices in EUR.`,
           <div><label style={BASE_LBL}>Target Margin %</label><input value={targetPct} onChange={e=>setTarget(e.target.value)} type="number" placeholder="20" style={BASE_INP}/></div>
         </div>
         <button onClick={search} disabled={!query.trim()||loading}
-          style={{ background:loading||!query.trim()?"#222":"#c9a84c", border:"none", borderRadius:8, padding:"9px 22px", color:loading||!query.trim()?"#555":"#0d0d0d", fontWeight:700, fontSize:13, cursor:loading?"default":"pointer", display:"inline-flex", alignItems:"center", gap:8 }}>
-          {loading?<><span style={{ display:"inline-block",width:13,height:13,border:"2px solid #555",borderTopColor:"#c9a84c",borderRadius:"50%",animation:"spin 0.8s linear infinite" }}/>Searching markets…</>:"🔍 Search Market Prices"}
+          style={{ background:loading||!query.trim()?"#e8ddd3":"#f59e0b", border:"none", borderRadius:8, padding:"9px 22px", color:loading||!query.trim()?"#9a8a78":"#f5f0eb", fontWeight:700, fontSize:13, cursor:loading?"default":"pointer", display:"inline-flex", alignItems:"center", gap:8 }}>
+          {loading?<><span style={{ display:"inline-block",width:13,height:13,border:"2px solid #555",borderTopColor:"#f59e0b",borderRadius:"50%",animation:"spin 0.8s linear infinite" }}/>Searching markets…</>:"🔍 Search Market Prices"}
         </button>
         <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
       </div>
       {totalCost>0&&(
         <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:12 }}>
-          {[["Total Cost",totalCost,"#888"],["Break Even",totalCost,"#666"],["Target Sell",targetSell,"#c9a84c"],["Target Profit",targetSell-totalCost,"#5de08a"]].map(([l,v,c])=>(
+          {[["Total Cost",totalCost,"#9a8a78"],["Break Even",totalCost,"#7a6a58"],["Target Sell",targetSell,"#f59e0b"],["Target Profit",targetSell-totalCost,"#10b981"]].map(([l,v,c])=>(
             <div key={l} style={{ ...CARD, padding:"16px 18px" }}>
-              <div style={{ fontSize:10, color:"#555", textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:6 }}>{l}</div>
+              <div style={{ fontSize:10, color:"#9a8a78", textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:6 }}>{l}</div>
               <div style={{ ...NUM, fontSize:18, color:c }}>€{Number(v).toLocaleString("de-DE")}</div>
             </div>
           ))}
@@ -581,15 +597,15 @@ All prices in EUR.`,
             <thead><tr style={{ borderBottom:"1px solid #222" }}>{["Card","Set","No.","Grade","Cost","Ask/Sold","Net Profit","Margin","Status"].map(h=><TH key={h}>{h}</TH>)}</tr></thead>
             <tbody>
               {comparables.map(c=>(
-                <tr key={c.id} style={{ borderBottom:"1px solid #161616" }}>
-                  <td style={{ padding:"9px 12px", color:"#ccc" }}>{c.name}</td>
+                <tr key={c.id} style={{ borderBottom:"1px solid #f0e9e0" }}>
+                  <td style={{ padding:"9px 12px", color:"#4a3a2a" }}>{c.name}</td>
                   <TD dim>{c.set}</TD>
                   <TD mono dim>{c.cardNo}</TD>
-                  <td style={{ padding:"9px 12px", color:"#9333ea", fontSize:11 }}>{c.grade}</td>
+                  <td style={{ padding:"9px 12px", color:"#8b5cf6", fontSize:11 }}>{c.grade}</td>
                   <TD mono>€{c.cost.toLocaleString("de-DE")}</TD>
-                  <td style={{ padding:"9px 12px", ...NUM, color:"#c9a84c" }}>€{c.askingPrice.toLocaleString("de-DE")}</td>
-                  <td style={{ padding:"9px 12px", ...NUM, color:netProf(c)>=0?"#5de08a":"#e85d04", fontWeight:600 }}>€{netProf(c).toLocaleString("de-DE")}</td>
-                  <td style={{ padding:"9px 12px", ...NUM, color:netMarg(c)>=0.15?"#5de08a":netMarg(c)>=0.05?"#c9a84c":"#e85d04" }}>{pct(netMarg(c))}</td>
+                  <td style={{ padding:"9px 12px", ...NUM, color:"#f59e0b" }}>€{c.askingPrice.toLocaleString("de-DE")}</td>
+                  <td style={{ padding:"9px 12px", ...NUM, color:netProf(c)>=0?"#10b981":"#ef4444", fontWeight:600 }}>€{netProf(c).toLocaleString("de-DE")}</td>
+                  <td style={{ padding:"9px 12px", ...NUM, color:netMarg(c)>=0.15?"#10b981":netMarg(c)>=0.05?"#f59e0b":"#ef4444" }}>{pct(netMarg(c))}</td>
                   <td style={{ padding:"9px 12px" }}><Badge status={c.status}/></td>
                 </tr>
               ))}
@@ -597,43 +613,43 @@ All prices in EUR.`,
           </table>
         </div>
       )}
-      {error&&<div style={{ ...CARD, borderColor:"#3a1010", background:"#1a0808", color:"#e85d04", fontSize:13 }}>{error}</div>}
+      {error&&<div style={{ ...CARD, borderColor:"#3a1010", background:"#1a0808", color:"#ef4444", fontSize:13 }}>{error}</div>}
       {result&&(
         <>
           <div style={CARD}>
             <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:14 }}>
               <div>
                 <div style={{ fontFamily:"'Syne',sans-serif", fontSize:16, fontWeight:600, marginBottom:4 }}>{result.cardName}</div>
-                <div style={{ fontSize:12, color:"#777", lineHeight:1.5 }}>{result.marketNotes}</div>
+                <div style={{ fontSize:12, color:"#8a7a68", lineHeight:1.5 }}>{result.marketNotes}</div>
               </div>
-              <span style={{ fontSize:10, padding:"3px 10px", borderRadius:20, background:result.confidence==="high"?"#1a2a1a":result.confidence==="medium"?"#2a1a0e":"#222", color:result.confidence==="high"?"#5de08a":result.confidence==="medium"?"#c9a84c":"#888", flexShrink:0, marginLeft:12 }}>{result.confidence} confidence</span>
+              <span style={{ fontSize:10, padding:"3px 10px", borderRadius:20, background:result.confidence==="high"?"#d1fae5":result.confidence==="medium"?"#fef3c7":"#e8ddd3", color:result.confidence==="high"?"#10b981":result.confidence==="medium"?"#f59e0b":"#9a8a78", flexShrink:0, marginLeft:12 }}>{result.confidence} confidence</span>
             </div>
             <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:12, marginBottom:14 }}>
-              {[["Market Low",result.priceRange?.low||0,"#888"],["Avg Price",result.avgPrice||0,"#c9a84c"],["Market High",result.priceRange?.high||0,"#5de08a"]].map(([l,v,c])=>(
-                <div key={l} style={{ background:"#121212", borderRadius:10, padding:"14px 16px", textAlign:"center" }}>
-                  <div style={{ fontSize:10, color:"#555", marginBottom:6, textTransform:"uppercase", letterSpacing:"0.08em" }}>{l}</div>
+              {[["Market Low",result.priceRange?.low||0,"#9a8a78"],["Avg Price",result.avgPrice||0,"#f59e0b"],["Market High",result.priceRange?.high||0,"#10b981"]].map(([l,v,c])=>(
+                <div key={l} style={{ background:"#f0eae2", borderRadius:10, padding:"14px 16px", textAlign:"center" }}>
+                  <div style={{ fontSize:10, color:"#9a8a78", marginBottom:6, textTransform:"uppercase", letterSpacing:"0.08em" }}>{l}</div>
                   <div style={{ ...NUM, fontSize:20, color:c }}>€{Number(v).toLocaleString("de-DE")}</div>
                 </div>
               ))}
             </div>
             {totalCost>0&&result.avgPrice&&(
-              <div style={{ background:"#121212", borderRadius:10, padding:"14px 16px", marginBottom:14, display:"flex", gap:24, flexWrap:"wrap" }}>
-                <span style={{ fontSize:12, color:"#777" }}>At avg: <strong style={{ ...NUM, color:(result.avgPrice-totalCost)>=0?"#5de08a":"#e85d04" }}>€{(result.avgPrice-totalCost).toLocaleString("de-DE")} profit</strong></span>
-                <span style={{ fontSize:12, color:"#777" }}>Margin: <strong style={{ ...NUM, color:"#c9a84c" }}>{totalCost>0?pct((result.avgPrice-totalCost)/totalCost):"—"}</strong></span>
-                <span style={{ fontSize:12, color:"#777" }}>vs target: <strong style={{ color:result.avgPrice>=targetSell?"#5de08a":"#e85d04" }}>{result.avgPrice>=targetSell?"✓ achievable":"✗ below target"}</strong></span>
+              <div style={{ background:"#f0eae2", borderRadius:10, padding:"14px 16px", marginBottom:14, display:"flex", gap:24, flexWrap:"wrap" }}>
+                <span style={{ fontSize:12, color:"#8a7a68" }}>At avg: <strong style={{ ...NUM, color:(result.avgPrice-totalCost)>=0?"#10b981":"#ef4444" }}>€{(result.avgPrice-totalCost).toLocaleString("de-DE")} profit</strong></span>
+                <span style={{ fontSize:12, color:"#8a7a68" }}>Margin: <strong style={{ ...NUM, color:"#f59e0b" }}>{totalCost>0?pct((result.avgPrice-totalCost)/totalCost):"—"}</strong></span>
+                <span style={{ fontSize:12, color:"#8a7a68" }}>vs target: <strong style={{ color:result.avgPrice>=targetSell?"#10b981":"#ef4444" }}>{result.avgPrice>=targetSell?"✓ achievable":"✗ below target"}</strong></span>
               </div>
             )}
             {result.gradePremiums&&(
               <div>
-                <div style={{ fontSize:11, color:"#666", marginBottom:8 }}>Price by grade (from avg €{(result.avgPrice||0).toLocaleString("de-DE")}):</div>
+                <div style={{ fontSize:11, color:"#7a6a58", marginBottom:8 }}>Price by grade (from avg €{(result.avgPrice||0).toLocaleString("de-DE")}):</div>
                 <div style={{ display:"grid", gridTemplateColumns:"repeat(6,1fr)", gap:8 }}>
                   {["Raw","PSA 7","PSA 8","PSA 9","PSA 10","BGS 9.5"].map(g=>{
                     const adj=gradeAdj(result.avgPrice,g), m=totalCost>0&&adj?((adj-totalCost)/totalCost):null;
                     return (
-                      <div key={g} style={{ background:"#121212", borderRadius:8, padding:"10px 8px", textAlign:"center" }}>
-                        <div style={{ fontSize:9, color:"#555", marginBottom:4 }}>{g}</div>
-                        <div style={{ ...NUM, fontSize:13, color:"#ddd" }}>{adj?`€${adj.toLocaleString("de-DE")}`:"—"}</div>
-                        {m!==null&&<div style={{ fontSize:10, color:m>=0.15?"#5de08a":m>=0.05?"#c9a84c":"#e85d04", marginTop:3 }}>{pct(m)}</div>}
+                      <div key={g} style={{ background:"#f0eae2", borderRadius:8, padding:"10px 8px", textAlign:"center" }}>
+                        <div style={{ fontSize:9, color:"#9a8a78", marginBottom:4 }}>{g}</div>
+                        <div style={{ ...NUM, fontSize:13, color:"#3d3025" }}>{adj?`€${adj.toLocaleString("de-DE")}`:"—"}</div>
+                        {m!==null&&<div style={{ fontSize:10, color:m>=0.15?"#10b981":m>=0.05?"#f59e0b":"#ef4444", marginTop:3 }}>{pct(m)}</div>}
                       </div>
                     );
                   })}
@@ -646,13 +662,13 @@ All prices in EUR.`,
               <div style={SH_STYLE}>Market Sources</div>
               <div style={{ display:"flex", flexDirection:"column", gap:8 }}>
                 {result.sources.map((s,i)=>(
-                  <div key={i} style={{ display:"flex", alignItems:"center", gap:14, padding:"10px 12px", background:"#121212", borderRadius:8 }}>
+                  <div key={i} style={{ display:"flex", alignItems:"center", gap:14, padding:"10px 12px", background:"#f0eae2", borderRadius:8 }}>
                     <div style={{ flex:1 }}>
-                      <div style={{ fontSize:12, color:"#ccc", fontWeight:500 }}>{s.name}</div>
-                      <div style={{ fontSize:11, color:"#666", marginTop:2 }}>{s.grade}{s.date?` · ${s.date}`:""}</div>
+                      <div style={{ fontSize:12, color:"#4a3a2a", fontWeight:500 }}>{s.name}</div>
+                      <div style={{ fontSize:11, color:"#7a6a58", marginTop:2 }}>{s.grade}{s.date?` · ${s.date}`:""}</div>
                     </div>
-                    <div style={{ ...NUM, fontSize:16, color:"#c9a84c" }}>€{Number(s.price||0).toLocaleString("de-DE")}</div>
-                    {s.url&&s.url.startsWith("http")&&<a href={s.url} target="_blank" rel="noreferrer" style={{ fontSize:11, color:"#3a7bd5", textDecoration:"none", padding:"3px 8px", border:"1px solid #1a2f3a", borderRadius:6 }}>View →</a>}
+                    <div style={{ ...NUM, fontSize:16, color:"#f59e0b" }}>€{Number(s.price||0).toLocaleString("de-DE")}</div>
+                    {s.url&&s.url.startsWith("http")&&<a href={s.url} target="_blank" rel="noreferrer" style={{ fontSize:11, color:"#3b82f6", textDecoration:"none", padding:"3px 8px", border:"1px solid #1a2f3a", borderRadius:6 }}>View →</a>}
                   </div>
                 ))}
               </div>
@@ -660,7 +676,7 @@ All prices in EUR.`,
           )}
         </>
       )}
-      {searched&&!loading&&!result&&!error&&<div style={{ ...CARD, color:"#555", fontSize:13, textAlign:"center", padding:"30px" }}>No results. Try "Charizard Base Set 4/102" or "Pikachu Hidden Fates SV57".</div>}
+      {searched&&!loading&&!result&&!error&&<div style={{ ...CARD, color:"#9a8a78", fontSize:13, textAlign:"center", padding:"30px" }}>No results. Try "Charizard Base Set 4/102" or "Pikachu Hidden Fates SV57".</div>}
     </div>
   );
 }
@@ -769,7 +785,7 @@ export default function CardVault() {
   const SORT_FNS={year:(a,b)=>(a.year||"").localeCompare(b.year||""),set:(a,b)=>a.set.localeCompare(b.set),name:(a,b)=>a.name.localeCompare(b.name),grade:(a,b)=>GRADES.indexOf(a.grade)-GRADES.indexOf(b.grade),cost:(a,b)=>a.cost-b.cost,askingPrice:(a,b)=>a.askingPrice-b.askingPrice,netProfit:(a,b)=>netProf(a)-netProf(b),margin:(a,b)=>netMarg(a)-netMarg(b),days:(a,b)=>(holdDays(a)||0)-(holdDays(b)||0),bought:(a,b)=>new Date(a.bought||0)-new Date(b.bought||0),status:(a,b)=>a.status.localeCompare(b.status)};
   const sortedFiltered = useMemo(()=>{const fn=SORT_FNS[sortCol]||SORT_FNS.bought;return[...filtered].sort((a,b)=>sortDir==="asc"?fn(a,b):fn(b,a));},[filtered,sortCol,sortDir]);
   const setSort=col=>{if(sortCol===col)setSortDir(d=>d==="asc"?"desc":"asc");else{setSortCol(col);setSortDir("asc");}};
-  const SortIcon=({col})=>sortCol===col?(sortDir==="asc"?"↑":"↓"):<span style={{color:"#333"}}>↕</span>;
+  const SortIcon=({col})=>sortCol===col?(sortDir==="asc"?"↑":"↓"):<span style={{color:"#c0b0a0"}}>↕</span>;
 
   useEffect(()=>{
     const h=e=>{
@@ -786,50 +802,50 @@ export default function CardVault() {
 
   const INP=BASE_INP, LBL=BASE_LBL, SH=SH_STYLE;
   const H1={fontFamily:"'Syne',sans-serif",fontSize:22,fontWeight:700,margin:"0 0 20px"};
-  const donut=[{name:"Listed",value:cards.filter(c=>c.status==="listed").length,color:"#c9a84c"},{name:"Sold",value:sold.length,color:"#3a7bd5"},{name:"Holding",value:cards.filter(c=>c.status==="holding").length,color:"#5de08a"},{name:"Grading",value:cards.filter(c=>c.status==="grading").length,color:"#9333ea"}].filter(d=>d.value>0);
+  const donut=[{name:"Listed",value:cards.filter(c=>c.status==="listed").length,color:"#f59e0b"},{name:"Sold",value:sold.length,color:"#3b82f6"},{name:"Holding",value:cards.filter(c=>c.status==="holding").length,color:"#10b981"},{name:"Grading",value:cards.filter(c=>c.status==="grading").length,color:"#8b5cf6"}].filter(d=>d.value>0);
 
   return (
-    <div style={{ minHeight:"100vh", background:"#0d0d0d", color:"#f0ebe0", fontFamily:"'DM Sans','Segoe UI',sans-serif" }}>
+    <div style={{ minHeight:"100vh", background:"#f5f0eb", color:"#2d2318", fontFamily:"'DM Sans','Segoe UI',sans-serif" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
         *{box-sizing:border-box;} input,select,textarea{color-scheme:dark;}
-        ::-webkit-scrollbar{width:5px;height:5px} ::-webkit-scrollbar-track{background:#0d0d0d} ::-webkit-scrollbar-thumb{background:#2a2a2a;border-radius:3px}
+        ::-webkit-scrollbar{width:5px;height:5px} ::-webkit-scrollbar-track{background:#f5f0eb} ::-webkit-scrollbar-thumb{background:#c8b8a8;border-radius:3px}
         input::placeholder,textarea::placeholder{color:#333}
-        .row:hover td{background:#111 !important}
-        .ghost{background:none;border:1px solid #2e2e2e;border-radius:8px;padding:5px 12px;color:#666;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.1s}
+        .row:hover td{background:#faf5f0 !important}
+        .ghost{background:none;border:1px solid #e0d5c8;border-radius:8px;padding:5px 12px;color:#666;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.1s}
         .ghost:hover{border-color:#444;color:#aaa}
-        .pill{border:1px solid #2e2e2e;border-radius:8px;padding:5px 11px;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.1s}
+        .pill{border:1px solid #e0d5c8;border-radius:8px;padding:5px 11px;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.1s}
         @media(max-width:768px){.desktop-nav{display:none!important}.mobile-btn{display:flex!important}.kpi4{grid-template-columns:1fr 1fr!important}.kpi6{grid-template-columns:1fr 1fr!important}.two-col{grid-template-columns:1fr!important}.filter-grid{grid-template-columns:1fr 1fr!important}}
       `}</style>
 
       {/* NAV */}
-      <nav style={{ borderBottom:"1px solid #1e1e1e", padding:"0 24px", display:"flex", alignItems:"center", height:54, position:"sticky", top:0, background:"rgba(13,13,13,0.97)", backdropFilter:"blur(20px)", zIndex:200 }}>
+      <nav style={{ borderBottom:"1px solid #ece6df", padding:"0 24px", display:"flex", alignItems:"center", height:54, position:"sticky", top:0, background:"rgba(245,240,235,0.97)", backdropFilter:"blur(20px)", zIndex:200 }}>
         <div style={{ display:"flex", alignItems:"center", gap:7, marginRight:16, flexShrink:0 }}>
-          <span style={{ fontSize:20 }}>🃏</span>
-          <span style={{ fontFamily:"'Syne',sans-serif", fontSize:14, fontWeight:700, color:"#c9a84c", letterSpacing:"0.06em", whiteSpace:"nowrap" }}>CARD VAULT</span>
+          <PokeBall size={22}/>
+          <span style={{ fontFamily:"'Syne',sans-serif", fontSize:14, fontWeight:700, color:"#f59e0b", letterSpacing:"0.06em", whiteSpace:"nowrap" }}>CARD VAULT</span>
         </div>
         <div className="desktop-nav" style={{ display:"flex", gap:1, overflowX:"auto", flex:1 }}>
-          {NAV.map(n=><button key={n} onClick={()=>setTab(n)} style={{ background:tab===n?"#1c1c1c":"none", border:"none", borderRadius:7, padding:"5px 11px", color:tab===n?"#f0ebe0":"#444", fontSize:12, cursor:"pointer", fontWeight:tab===n?600:400, whiteSpace:"nowrap", flexShrink:0 }}>{n}</button>)}
+          {NAV.map(n=><button key={n} onClick={()=>setTab(n)} style={{ background:tab===n?"#e8ddd0":"none", border:"none", borderRadius:7, padding:"5px 11px", color:tab===n?"#2d2318":"#b0a090", fontSize:12, cursor:"pointer", fontWeight:tab===n?600:400, whiteSpace:"nowrap", flexShrink:0 }}>{n}</button>)}
         </div>
-        <button className="mobile-btn" onClick={()=>setMobileNav(o=>!o)} style={{ display:"none", background:"none", border:"1px solid #2e2e2e", borderRadius:8, padding:"5px 10px", color:"#888", fontSize:18, cursor:"pointer", marginLeft:8, flexShrink:0 }}>☰</button>
+        <button className="mobile-btn" onClick={()=>setMobileNav(o=>!o)} style={{ display:"none", background:"none", border:"1px solid #e0d5c8", borderRadius:8, padding:"5px 10px", color:"#9a8a78", fontSize:18, cursor:"pointer", marginLeft:8, flexShrink:0 }}>☰</button>
         <div style={{ marginLeft:"auto", display:"flex", gap:8, flexShrink:0 }}>
-          <select value={currency} onChange={e=>setCurrency(e.target.value)} style={{ background:"#1c1c1c", border:"1px solid #2e2e2e", borderRadius:8, padding:"5px 10px", color:"#888", fontSize:11, cursor:"pointer", outline:"none" }}>
+          <select value={currency} onChange={e=>setCurrency(e.target.value)} style={{ background:"#ede5db", border:"1px solid #e0d5c8", borderRadius:8, padding:"5px 10px", color:"#9a8a78", fontSize:11, cursor:"pointer", outline:"none" }}>
             {Object.keys(CURRENCIES).map(c=><option key={c} value={c}>{c}</option>)}
           </select>
           <button onClick={()=>exportCSV(cards,suppliers)} className="ghost">↓ CSV</button>
           {isAdmin&&<><button onClick={()=>setSm("new")} className="ghost">+ Supplier</button>
-          <button onClick={()=>setCm("new")} style={{ background:"#c9a84c", border:"none", borderRadius:8, padding:"6px 16px", color:"#0d0d0d", fontWeight:700, fontSize:12, cursor:"pointer" }}>+ Card</button></>}
-          <div style={{ width:1, height:20, background:"#222", margin:"0 4px" }}/>
-          <div style={{ display:"flex", alignItems:"center", gap:6, padding:"4px 10px", background:"#1a1a1a", borderRadius:8, border:"1px solid #2e2e2e" }}>
-            <span style={{ width:7, height:7, borderRadius:"50%", background:isAdmin?"#5de08a":"#3a7bd5" }}/>
-            <span style={{ fontSize:11, color:isAdmin?"#5de08a":"#3a7bd5" }}>{isAdmin?"Admin":"View only"}</span>
-            <button onClick={()=>setRole(null)} style={{ background:"none", border:"none", color:"#444", fontSize:11, cursor:"pointer", padding:0, marginLeft:4 }}>↩</button>
+          <button onClick={()=>setCm("new")} style={{ background:"#f59e0b", border:"none", borderRadius:8, padding:"6px 16px", color:"#f5f0eb", fontWeight:700, fontSize:12, cursor:"pointer" }}>+ Card</button></>}
+          <div style={{ width:1, height:20, background:"#e8ddd3", margin:"0 4px" }}/>
+          <div style={{ display:"flex", alignItems:"center", gap:6, padding:"4px 10px", background:"#ece4d8", borderRadius:8, border:"1px solid #e0d5c8" }}>
+            <span style={{ width:7, height:7, borderRadius:"50%", background:isAdmin?"#10b981":"#3b82f6" }}/>
+            <span style={{ fontSize:11, color:isAdmin?"#10b981":"#3b82f6" }}>{isAdmin?"Admin":"View only"}</span>
+            <button onClick={()=>setRole(null)} style={{ background:"none", border:"none", color:"#b0a090", fontSize:11, cursor:"pointer", padding:0, marginLeft:4 }}>↩</button>
           </div>
-          {isAdmin&&<button onClick={()=>{if(window.confirm("Reset all data to demo?")){{localStorage.removeItem(LS);window.location.reload();}}}} className="ghost" style={{ color:"#e85d04", borderColor:"#3a1a1a", fontSize:10 }}>Reset</button>}
+          {isAdmin&&<button onClick={()=>{if(window.confirm("Reset all data to demo?")){{localStorage.removeItem(LS);window.location.reload();}}}} className="ghost" style={{ color:"#ef4444", borderColor:"#3a1a1a", fontSize:10 }}>Reset</button>}
         </div>
       </nav>
-      {mobileNav&&<div style={{ position:"fixed", top:54, left:0, right:0, background:"#181818", borderBottom:"1px solid #2e2e2e", zIndex:190, display:"flex", flexDirection:"column", padding:8 }}>
-        {NAV.map(n=><button key={n} onClick={()=>{setTab(n);setMobileNav(false);}} style={{ background:tab===n?"#222":"none", border:"none", borderRadius:8, padding:"10px 16px", color:tab===n?"#f0ebe0":"#888", fontSize:14, cursor:"pointer", textAlign:"left" }}>{n}</button>)}
+      {mobileNav&&<div style={{ position:"fixed", top:54, left:0, right:0, background:"#ffffff", borderBottom:"1px solid #e0d5c8", zIndex:190, display:"flex", flexDirection:"column", padding:8 }}>
+        {NAV.map(n=><button key={n} onClick={()=>{setTab(n);setMobileNav(false);}} style={{ background:tab===n?"#e8ddd3":"none", border:"none", borderRadius:8, padding:"10px 16px", color:tab===n?"#2d2318":"#9a8a78", fontSize:14, cursor:"pointer", textAlign:"left" }}>{n}</button>)}
       </div>}
 
       <div style={{ maxWidth:1200, margin:"0 auto", padding:"26px 24px" }}>
@@ -837,33 +853,33 @@ export default function CardVault() {
         {/* ── OVERVIEW ── */}
         {tab==="Overview"&&<>
           <h1 style={H1}>Collection Overview</h1>
-          <div style={{ fontSize:10, color:"#555", textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:10 }}>Realised</div>
+          <div style={{ fontSize:10, color:"#9a8a78", textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:10 }}>Realised</div>
           <div className="kpi4" style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:12, marginBottom:20 }}>
-            <Kpi label="Net P&L"    value={fmtC(totalNetProfit)} sub={`${sold.length} cards sold`}   accent="#c9a84c" highlight/>
-            <Kpi label="Win Rate"   value={pct(winRate)}         sub="Deals ≥10% margin"             accent="#5de08a"/>
-            <Kpi label="Avg Margin" value={pct(avgNetMargin)}    sub="After grading costs"           accent="#5de08a"/>
+            <Kpi label="Net P&L"    value={fmtC(totalNetProfit)} sub={`${sold.length} cards sold`}   accent="#f59e0b" highlight/>
+            <Kpi label="Win Rate"   value={pct(winRate)}         sub="Deals ≥10% margin"             accent="#10b981"/>
+            <Kpi label="Avg Margin" value={pct(avgNetMargin)}    sub="After grading costs"           accent="#10b981"/>
             <Kpi label="Avg Hold"   value={avgHold+"d"}          sub="Days to sell"/>
           </div>
-          <div style={{ fontSize:10, color:"#555", textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:10 }}>Active</div>
+          <div style={{ fontSize:10, color:"#9a8a78", textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:10 }}>Active</div>
           <div className="kpi4" style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:12, marginBottom:20 }}>
             <Kpi label="Stock Value"      value={fmtC(capRisk)}         sub={`${active.length} cards`}/>
-            <Kpi label="Unrealised P&L"   value={fmtC(unrealisedPnl)}   sub="vs market value" accent={unrealisedPnl>=0?"#3a7bd5":"#e85d04"}/>
+            <Kpi label="Unrealised P&L"   value={fmtC(unrealisedPnl)}   sub="vs market value" accent={unrealisedPnl>=0?"#3b82f6":"#ef4444"}/>
             <Kpi label="Grading Spend"    value={fmtC(totalGradeCost)}  sub="Total grading costs"/>
-            <Kpi label="Pipeline"         value={pipeline.length+""}    sub="Deals tracked" accent="#9333ea"/>
+            <Kpi label="Pipeline"         value={pipeline.length+""}    sub="Deals tracked" accent="#8b5cf6"/>
           </div>
           <div className="two-col" style={{ display:"grid", gridTemplateColumns:"2fr 1fr", gap:14, marginBottom:14 }}>
             <div style={CARD}>
               <div style={SH}>Recent Activity</div>
               <div style={{ display:"flex", flexDirection:"column", gap:6 }}>
                 {recentActivity.map(c=>{const hd=holdDays(c);return(
-                  <div key={c.id} style={{ display:"flex", alignItems:"center", gap:12, padding:"10px 12px", background:"#121212", borderRadius:10 }}>
-                    <span style={{ fontSize:18, flexShrink:0 }}>{SETS.find(s=>s.n===c.set)?.f||"🃏"}</span>
+                  <div key={c.id} style={{ display:"flex", alignItems:"center", gap:12, padding:"10px 12px", background:"#f0eae2", borderRadius:10 }}>
+                    <span style={{ fontSize:18, flexShrink:0 }}>{SETS.find(s=>s.n===c.set)?.f||"⚡"}</span>
                     <div style={{ flex:1 }}>
-                      <div style={{ fontSize:13, color:"#ddd", fontWeight:500 }}>{c.name}</div>
-                      <div style={{ fontSize:11, color:"#666", marginTop:2 }}>{c.set} · {c.grade}{hd?` · ${hd}d`:""}</div>
+                      <div style={{ fontSize:13, color:"#3d3025", fontWeight:500 }}>{c.name}</div>
+                      <div style={{ fontSize:11, color:"#7a6a58", marginTop:2 }}>{c.set} · {c.grade}{hd?` · ${hd}d`:""}</div>
                     </div>
                     <div style={{ textAlign:"right" }}>
-                      <div style={{ ...NUM, fontSize:13, color:c.status==="sold"?"#5de08a":"#c9a84c" }}>{fmtC(c.askingPrice)}</div>
+                      <div style={{ ...NUM, fontSize:13, color:c.status==="sold"?"#10b981":"#f59e0b" }}>{fmtC(c.askingPrice)}</div>
                       <div style={{ marginTop:3 }}><Badge status={c.status}/></div>
                     </div>
                   </div>
@@ -875,21 +891,21 @@ export default function CardVault() {
                 <div style={SH}>Monthly P&L</div>
                 <ResponsiveContainer width="100%" height={130}>
                   <BarChart data={monthly} barSize={14}>
-                    <XAxis dataKey="label" tick={{fill:"#555",fontSize:9}} axisLine={false} tickLine={false}/>
-                    <YAxis tick={{fill:"#555",fontSize:9,...NUM}} axisLine={false} tickLine={false} tickFormatter={v=>"€"+(v/1000).toFixed(0)+"k"}/>
+                    <XAxis dataKey="label" tick={{fill:"#9a8a78",fontSize:9}} axisLine={false} tickLine={false}/>
+                    <YAxis tick={{fill:"#9a8a78",fontSize:9,...NUM}} axisLine={false} tickLine={false} tickFormatter={v=>"€"+(v/1000).toFixed(0)+"k"}/>
                     <Tooltip content={<ChartTip/>}/>
-                    <Bar dataKey="profit" name="Net Profit" fill="#c9a84c" radius={[3,3,0,0]}/>
+                    <Bar dataKey="profit" name="Net Profit" fill="#f59e0b" radius={[3,3,0,0]}/>
                   </BarChart>
                 </ResponsiveContainer>
               </div>
               <div className="two-col" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10 }}>
                 <div style={{ ...CARD, padding:"14px 16px" }}>
-                  <div style={{ fontSize:10, color:"#555", textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:6 }}>Best Flip</div>
-                  {bestFlip?<><div style={{ fontSize:11, color:"#999", marginBottom:2, whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis" }}>{bestFlip.name}</div><div style={{ ...NUM, fontSize:16, color:"#5de08a" }}>{fmtC(netProf(bestFlip))}</div><div style={{ fontSize:10, color:"#555", marginTop:2 }}>{pct(netMarg(bestFlip))}</div></>:<div style={{ color:"#555", fontSize:11 }}>No sales yet</div>}
+                  <div style={{ fontSize:10, color:"#9a8a78", textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:6 }}>Best Flip</div>
+                  {bestFlip?<><div style={{ fontSize:11, color:"#999", marginBottom:2, whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis" }}>{bestFlip.name}</div><div style={{ ...NUM, fontSize:16, color:"#10b981" }}>{fmtC(netProf(bestFlip))}</div><div style={{ fontSize:10, color:"#9a8a78", marginTop:2 }}>{pct(netMarg(bestFlip))}</div></>:<div style={{ color:"#9a8a78", fontSize:11 }}>No sales yet</div>}
                 </div>
                 <div style={{ ...CARD, padding:"14px 16px" }}>
-                  <div style={{ fontSize:10, color:"#555", textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:6 }}>Worst Flip</div>
-                  {worstFlip?<><div style={{ fontSize:11, color:"#999", marginBottom:2, whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis" }}>{worstFlip.name}</div><div style={{ ...NUM, fontSize:16, color:netProf(worstFlip)<0?"#e85d04":"#c9a84c" }}>{fmtC(netProf(worstFlip))}</div><div style={{ fontSize:10, color:"#555", marginTop:2 }}>{pct(netMarg(worstFlip))}</div></>:<div style={{ color:"#555", fontSize:11 }}>No sales yet</div>}
+                  <div style={{ fontSize:10, color:"#9a8a78", textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:6 }}>Worst Flip</div>
+                  {worstFlip?<><div style={{ fontSize:11, color:"#999", marginBottom:2, whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis" }}>{worstFlip.name}</div><div style={{ ...NUM, fontSize:16, color:netProf(worstFlip)<0?"#ef4444":"#f59e0b" }}>{fmtC(netProf(worstFlip))}</div><div style={{ fontSize:10, color:"#9a8a78", marginTop:2 }}>{pct(netMarg(worstFlip))}</div></>:<div style={{ color:"#9a8a78", fontSize:11 }}>No sales yet</div>}
                 </div>
               </div>
             </div>
@@ -902,15 +918,15 @@ export default function CardVault() {
                 <tbody>
                   {active.sort((a,b)=>(holdDays(b)||0)-(holdDays(a)||0)).map(c=>{
                     const unreal=(c.marketValue||c.askingPrice)-c.cost-(c.gradingCost||0),hd=holdDays(c);
-                    return <tr key={c.id} className="row" style={{ borderBottom:"1px solid #161616" }}>
-                      <td style={{ padding:"10px 14px", color:"#ccc" }}>{c.name}</td>
-                      <td style={{ padding:"10px 14px", color:"#888", fontSize:11 }}>{c.set}</td>
+                    return <tr key={c.id} className="row" style={{ borderBottom:"1px solid #f0e9e0" }}>
+                      <td style={{ padding:"10px 14px", color:"#4a3a2a" }}>{c.name}</td>
+                      <td style={{ padding:"10px 14px", color:"#9a8a78", fontSize:11 }}>{c.set}</td>
                       <TD mono dim>{c.cardNo}</TD>
-                      <td style={{ padding:"10px 14px", fontSize:11, color:"#9333ea" }}>{c.grade}</td>
+                      <td style={{ padding:"10px 14px", fontSize:11, color:"#8b5cf6" }}>{c.grade}</td>
                       <TD mono>{fmtC(c.cost)}</TD>
                       <TD mono>{fmtC(c.askingPrice)}</TD>
-                      <td style={{ padding:"10px 14px",...NUM,color:unreal>=0?"#3a7bd5":"#e85d04",fontWeight:600 }}>{fmtC(unreal)}</td>
-                      <td style={{ padding:"10px 14px",...NUM,fontSize:11,color:hd>90?"#e85d04":hd>30?"#c9a84c":"#5de08a" }}>{hd}d</td>
+                      <td style={{ padding:"10px 14px",...NUM,color:unreal>=0?"#3b82f6":"#ef4444",fontWeight:600 }}>{fmtC(unreal)}</td>
+                      <td style={{ padding:"10px 14px",...NUM,fontSize:11,color:hd>90?"#ef4444":hd>30?"#f59e0b":"#10b981" }}>{hd}d</td>
                       <td style={{ padding:"10px 14px" }}><Badge status={c.status}/></td>
                     </tr>;
                   })}
@@ -925,7 +941,7 @@ export default function CardVault() {
           <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:16, flexWrap:"wrap" }}>
             <h1 style={{ ...H1, margin:0, flex:1 }}>Inventory</h1>
             <button onClick={()=>exportCSV(cards,suppliers)} className="ghost">↓ CSV</button>
-            {isAdmin&&<button onClick={()=>setCm("new")} style={{ background:"#c9a84c", border:"none", borderRadius:8, padding:"7px 16px", color:"#0d0d0d", fontWeight:700, fontSize:12, cursor:"pointer" }}>+ Card</button>}
+            {isAdmin&&<button onClick={()=>setCm("new")} style={{ background:"#f59e0b", border:"none", borderRadius:8, padding:"7px 16px", color:"#f5f0eb", fontWeight:700, fontSize:12, cursor:"pointer" }}>+ Card</button>}
           </div>
           <div style={{ ...CARD, padding:"14px 16px", marginBottom:14 }}>
             <div className="filter-grid" style={{ display:"grid", gridTemplateColumns:"2fr 1fr 1fr 1fr 1fr 1fr auto", gap:10, alignItems:"end" }}>
@@ -938,14 +954,14 @@ export default function CardVault() {
               <button onClick={()=>{setSearch("");setFStatus("all");setFSet("all");setFGrade("all");setFMargin("0");setFSupplier("all");}} className="ghost" style={{ padding:"9px 14px", alignSelf:"flex-end" }}>Reset</button>
             </div>
           </div>
-          <div style={{ fontSize:11, color:"#555", marginBottom:10 }}>{filtered.length} cards{filtered.length!==cards.length?` (filtered from ${cards.length})`:""}</div>
+          <div style={{ fontSize:11, color:"#9a8a78", marginBottom:10 }}>{filtered.length} cards{filtered.length!==cards.length?` (filtered from ${cards.length})`:""}</div>
           {isAdmin&&selected.size>0&&(
             <div style={{ display:"flex", alignItems:"center", gap:12, padding:"10px 16px", background:"#1e1a0e", border:"1px solid #3a2a0e", borderRadius:10, marginBottom:12 }}>
-              <span style={{ fontSize:12, color:"#c9a84c", fontWeight:600 }}>{selected.size} selected</span>
+              <span style={{ fontSize:12, color:"#f59e0b", fontWeight:600 }}>{selected.size} selected</span>
               <select value={bulkStatus} onChange={e=>setBulkStatus(e.target.value)} style={{ ...BASE_INP, width:140, padding:"6px 10px", fontSize:12 }}><option value="">Set status…</option>{STATUSES.map(s=><option key={s}>{s}</option>)}</select>
-              <button onClick={applyBulkStatus} disabled={!bulkStatus} style={{ background:bulkStatus?"#c9a84c":"#333", border:"none", borderRadius:8, padding:"6px 16px", color:bulkStatus?"#0d0d0d":"#555", fontSize:12, fontWeight:700, cursor:bulkStatus?"pointer":"default" }}>Apply</button>
+              <button onClick={applyBulkStatus} disabled={!bulkStatus} style={{ background:bulkStatus?"#f59e0b":"#c0b0a0", border:"none", borderRadius:8, padding:"6px 16px", color:bulkStatus?"#f5f0eb":"#9a8a78", fontSize:12, fontWeight:700, cursor:bulkStatus?"pointer":"default" }}>Apply</button>
               <div style={{ width:1, height:18, background:"#3a2a0e" }}/>
-              <button onClick={deleteSelected} style={{ background:"none", border:"1px solid #5a1a1a", borderRadius:8, padding:"6px 14px", color:"#e85d04", fontSize:12, fontWeight:600, cursor:"pointer" }}>🗑 Delete {selected.size}</button>
+              <button onClick={deleteSelected} style={{ background:"none", border:"1px solid #5a1a1a", borderRadius:8, padding:"6px 14px", color:"#ef4444", fontSize:12, fontWeight:600, cursor:"pointer" }}>🗑 Delete {selected.size}</button>
               <button onClick={()=>setSelected(new Set())} className="ghost" style={{ marginLeft:"auto" }}>Clear</button>
             </div>
           )}
@@ -956,7 +972,7 @@ export default function CardVault() {
                   <tr style={{ borderBottom:"1px solid #222" }}>
                     {isAdmin&&<th style={{ padding:"10px 14px", width:36 }}><input type="checkbox" checked={selected.size===sortedFiltered.length&&sortedFiltered.length>0} onChange={()=>toggleSelectAll(sortedFiltered.map(c=>c.id))} style={{ cursor:"pointer" }}/></th>}
                     {[["year","Year"],["set","Set"],["name","Card"],["","No."],["grade","Grade"],["cost","Cost"],["askingPrice","Ask"],["","Grading"],["netProfit","Net Profit"],["margin","Margin"],["days","Days"],["","Mkt Val."],["status","Status"],["",""],["",""],["",""]].map(([col,label],i)=>(
-                      <th key={i} onClick={()=>col&&setSort(col)} style={{ padding:"10px 14px", textAlign:"left", color:col&&sortCol===col?"#c9a84c":"#555", fontWeight:500, fontSize:10, textTransform:"uppercase", letterSpacing:"0.08em", cursor:col?"pointer":"default", userSelect:"none", whiteSpace:"nowrap" }}>
+                      <th key={i} onClick={()=>col&&setSort(col)} style={{ padding:"10px 14px", textAlign:"left", color:col&&sortCol===col?"#f59e0b":"#9a8a78", fontWeight:500, fontSize:10, textTransform:"uppercase", letterSpacing:"0.08em", cursor:col?"pointer":"default", userSelect:"none", whiteSpace:"nowrap" }}>
                         {label} {col&&<SortIcon col={col}/>}
                       </th>
                     ))}
@@ -966,29 +982,29 @@ export default function CardVault() {
                   {sortedFiltered.map(c=>{
                     const np=netProf(c),nm=netMarg(c),mv=c.marketValue,isSel=selected.has(c.id),photos=c.photos||[];
                     return (
-                      <tr key={c.id} className="row" onClick={()=>setDrawer(c)} style={{ borderBottom:"1px solid #161616", cursor:"pointer", background:isSel?"#1a1a0a":"transparent" }}>
+                      <tr key={c.id} className="row" onClick={()=>setDrawer(c)} style={{ borderBottom:"1px solid #f0e9e0", cursor:"pointer", background:isSel?"#1a1a0a":"transparent" }}>
                         {isAdmin&&<td style={{ padding:"10px 14px" }} onClick={e=>{e.stopPropagation();toggleSelect(c.id);}}><input type="checkbox" checked={isSel} onChange={()=>toggleSelect(c.id)} style={{ cursor:"pointer" }}/></td>}
                         <TD mono dim>{c.year}</TD>
-                        <td style={{ padding:"10px 14px" }}><span style={{ display:"flex",alignItems:"center",gap:6 }}><span style={{ fontSize:14 }}>{SETS.find(s=>s.n===c.set)?.f||"🃏"}</span><span style={{ color:"#888",fontSize:11 }}>{c.set}</span></span></td>
-                        <td style={{ padding:"10px 14px", color:"#ddd", fontWeight:500 }}>
+                        <td style={{ padding:"10px 14px" }}><span style={{ display:"flex",alignItems:"center",gap:6 }}><span style={{ fontSize:14 }}>{SETS.find(s=>s.n===c.set)?.f||"⚡"}</span><span style={{ color:"#9a8a78",fontSize:11 }}>{c.set}</span></span></td>
+                        <td style={{ padding:"10px 14px", color:"#3d3025", fontWeight:500 }}>
                           <div style={{ display:"flex", alignItems:"center", gap:6 }}>
-                            {photos.length>0&&<img src={photos[0].data} alt="" style={{ width:24,height:24,objectFit:"cover",borderRadius:4,border:"1px solid #2e2e2e",flexShrink:0 }}/>}
+                            {photos.length>0&&<img src={photos[0].data} alt="" style={{ width:24,height:24,objectFit:"cover",borderRadius:4,border:"1px solid #e0d5c8",flexShrink:0 }}/>}
                             {c.name}
                           </div>
                         </td>
                         <TD mono dim>{c.cardNo}</TD>
-                        <td style={{ padding:"10px 14px", fontSize:11, color:"#9333ea" }}>{c.grade}</td>
+                        <td style={{ padding:"10px 14px", fontSize:11, color:"#8b5cf6" }}>{c.grade}</td>
                         <TD mono>{fmtC(c.cost)}</TD>
                         <TD mono>{fmtC(c.askingPrice)}</TD>
-                        <td style={{ padding:"10px 14px",...NUM,fontSize:11,color:c.gradingCost?"#9333ea":"#444" }}>{c.gradingCost?fmtC(c.gradingCost):"—"}</td>
-                        <td style={{ padding:"10px 14px",...NUM,color:np>=0?"#5de08a":"#e85d04",fontWeight:600 }}>{fmtC(np)}</td>
-                        <td style={{ padding:"10px 14px",...NUM,color:nm>=0.15?"#5de08a":nm>=0.05?"#c9a84c":"#e85d04" }}>{pct(nm)}</td>
+                        <td style={{ padding:"10px 14px",...NUM,fontSize:11,color:c.gradingCost?"#8b5cf6":"#b0a090" }}>{c.gradingCost?fmtC(c.gradingCost):"—"}</td>
+                        <td style={{ padding:"10px 14px",...NUM,color:np>=0?"#10b981":"#ef4444",fontWeight:600 }}>{fmtC(np)}</td>
+                        <td style={{ padding:"10px 14px",...NUM,color:nm>=0.15?"#10b981":nm>=0.05?"#f59e0b":"#ef4444" }}>{pct(nm)}</td>
                         <TD mono dim>{holdDays(c)??"-"}</TD>
-                        <td style={{ padding:"10px 14px",...NUM,fontSize:11,color:mv?(mv>c.cost?"#3a7bd5":"#e85d04"):"#444" }}>{mv?fmtC(mv):"—"}</td>
+                        <td style={{ padding:"10px 14px",...NUM,fontSize:11,color:mv?(mv>c.cost?"#3b82f6":"#ef4444"):"#b0a090" }}>{mv?fmtC(mv):"—"}</td>
                         <td style={{ padding:"10px 14px" }}><Badge status={c.status}/></td>
                         {isAdmin&&<td style={{ padding:"10px 14px" }} onClick={e=>e.stopPropagation()}><button className="ghost" onClick={()=>setCm(c)}>Edit</button></td>}
-                        {isAdmin&&<td style={{ padding:"10px 14px" }} onClick={e=>e.stopPropagation()}><button className="ghost" style={{ color:"#9333ea",borderColor:"#2e1e40" }} onClick={()=>setTlm(c)}>Log</button></td>}
-                        {isAdmin&&<td style={{ padding:"10px 14px" }} onClick={e=>e.stopPropagation()}><button className="ghost" style={{ color:"#e85d04",borderColor:"#3a1a1a" }} onClick={()=>deleteCard(c.id)}>🗑</button></td>}
+                        {isAdmin&&<td style={{ padding:"10px 14px" }} onClick={e=>e.stopPropagation()}><button className="ghost" style={{ color:"#8b5cf6",borderColor:"#2e1e40" }} onClick={()=>setTlm(c)}>Log</button></td>}
+                        {isAdmin&&<td style={{ padding:"10px 14px" }} onClick={e=>e.stopPropagation()}><button className="ghost" style={{ color:"#ef4444",borderColor:"#3a1a1a" }} onClick={()=>deleteCard(c.id)}>🗑</button></td>}
                       </tr>
                     );
                   })}
@@ -1002,16 +1018,16 @@ export default function CardVault() {
         {tab==="Logistics"&&<>
           <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:18 }}>
             <h1 style={{ ...H1, margin:0, flex:1 }}>Logistics</h1>
-            {isAdmin&&<button onClick={()=>setLogistics(l=>[...l,{id:Date.now(),cardId:"",set:"",name:"",carrier:"",trackingNo:"",from:"",to:"",status:"preparing",sent:"",eta:"",arrived:"",cost:0,insured:false,insuredValue:0,notes:""}])} style={{ background:"#c9a84c", border:"none", borderRadius:8, padding:"7px 18px", color:"#0d0d0d", fontWeight:700, fontSize:12, cursor:"pointer" }}>+ Add Shipment</button>}
+            {isAdmin&&<button onClick={()=>setLogistics(l=>[...l,{id:Date.now(),cardId:"",set:"",name:"",carrier:"",trackingNo:"",from:"",to:"",status:"preparing",sent:"",eta:"",arrived:"",cost:0,insured:false,insuredValue:0,notes:""}])} style={{ background:"#f59e0b", border:"none", borderRadius:8, padding:"7px 18px", color:"#f5f0eb", fontWeight:700, fontSize:12, cursor:"pointer" }}>+ Add Shipment</button>}
           </div>
           <div className="kpi4" style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:12, marginBottom:18 }}>
             <Kpi label="Total Shipments" value={logistics.length}/>
-            <Kpi label="In Transit"      value={logistics.filter(l=>l.status==="in transit").length} accent="#c9a84c"/>
-            <Kpi label="Delivered"       value={logistics.filter(l=>l.status==="delivered").length}  accent="#5de08a"/>
-            <Kpi label="Shipping Spend"  value={fmtC(logistics.reduce((a,l)=>a+(l.cost||0),0))}     accent="#9333ea"/>
+            <Kpi label="In Transit"      value={logistics.filter(l=>l.status==="in transit").length} accent="#f59e0b"/>
+            <Kpi label="Delivered"       value={logistics.filter(l=>l.status==="delivered").length}  accent="#10b981"/>
+            <Kpi label="Shipping Spend"  value={fmtC(logistics.reduce((a,l)=>a+(l.cost||0),0))}     accent="#8b5cf6"/>
           </div>
           {logistics.filter(l=>l.status!=="delivered").length>0&&<>
-            <div style={{ fontSize:10, color:"#555", textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:10 }}>In Transit / Grading</div>
+            <div style={{ fontSize:10, color:"#9a8a78", textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:10 }}>In Transit / Grading</div>
             <div style={{ display:"flex", flexDirection:"column", gap:10, marginBottom:20 }}>
               {logistics.filter(l=>l.status!=="delivered").map(s=>(
                 <div key={s.id} style={{ ...CARD, padding:"16px 20px", display:"flex", gap:16, alignItems:"center", flexWrap:"wrap" }}>
@@ -1019,24 +1035,24 @@ export default function CardVault() {
                     <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:5, flexWrap:"wrap" }}>
                       <span style={{ fontFamily:"'Syne',sans-serif", fontSize:14, fontWeight:600 }}>{s.name||"—"}</span>
                       <Badge status={s.status}/>
-                      {s.insured&&<span style={{ fontSize:10, padding:"2px 8px", borderRadius:20, background:"#1a2a1a", color:"#5de08a" }}>insured</span>}
+                      {s.insured&&<span style={{ fontSize:10, padding:"2px 8px", borderRadius:20, background:"#d1fae5", color:"#10b981" }}>insured</span>}
                     </div>
-                    <div style={{ display:"flex", gap:16, fontSize:11, color:"#666", flexWrap:"wrap" }}>
+                    <div style={{ display:"flex", gap:16, fontSize:11, color:"#7a6a58", flexWrap:"wrap" }}>
                       <span>📦 {s.carrier||"—"}</span><span>📍 {s.from||"—"} → {s.to||"—"}</span>
                       {s.eta&&<span>🕐 ETA: {s.eta}</span>}
                     </div>
-                    {s.trackingNo&&<div style={{ ...NUM, fontSize:11, color:"#666", marginTop:5 }}>{s.trackingNo}</div>}
+                    {s.trackingNo&&<div style={{ ...NUM, fontSize:11, color:"#7a6a58", marginTop:5 }}>{s.trackingNo}</div>}
                   </div>
                   <div style={{ display:"flex", gap:10, alignItems:"center", flexWrap:"wrap" }}>
                     <div style={{ textAlign:"right" }}>
-                      <div style={{ fontSize:10, color:"#555", marginBottom:2 }}>Cost</div>
-                      <div style={{ ...NUM, fontSize:13, color:"#aaa" }}>{fmtC(s.cost||0)}</div>
+                      <div style={{ fontSize:10, color:"#9a8a78", marginBottom:2 }}>Cost</div>
+                      <div style={{ ...NUM, fontSize:13, color:"#7a6a58" }}>{fmtC(s.cost||0)}</div>
                     </div>
                     {isAdmin&&["preparing","in transit","delivered"].map(st=>(
                       <button key={st} onClick={()=>setLogistics(ls=>ls.map(x=>x.id===s.id?{...x,status:st,arrived:st==="delivered"?new Date().toISOString().slice(0,10):x.arrived}:x))}
-                        className="pill" style={{ background:s.status===st?"#c9a84c":"#181818", color:s.status===st?"#0d0d0d":"#666", fontWeight:s.status===st?700:400, fontSize:10, padding:"4px 8px" }}>{st}</button>
+                        className="pill" style={{ background:s.status===st?"#f59e0b":"#ffffff", color:s.status===st?"#f5f0eb":"#7a6a58", fontWeight:s.status===st?700:400, fontSize:10, padding:"4px 8px" }}>{st}</button>
                     ))}
-                    {isAdmin&&<button onClick={()=>{if(window.confirm("Delete shipment?"))setLogistics(ls=>ls.filter(x=>x.id!==s.id));}} className="ghost" style={{ color:"#e85d04", borderColor:"#3a1a1a" }}>🗑</button>}
+                    {isAdmin&&<button onClick={()=>{if(window.confirm("Delete shipment?"))setLogistics(ls=>ls.filter(x=>x.id!==s.id));}} className="ghost" style={{ color:"#ef4444", borderColor:"#3a1a1a" }}>🗑</button>}
                   </div>
                 </div>
               ))}
@@ -1048,15 +1064,15 @@ export default function CardVault() {
                 <thead><tr style={{ borderBottom:"1px solid #222" }}>{["Card","Carrier","Tracking","Route","Sent","ETA/Arrived","Cost","Insured","Status"].map(h=><TH key={h}>{h}</TH>)}</tr></thead>
                 <tbody>
                   {[...logistics].sort((a,b)=>new Date(b.sent||0)-new Date(a.sent||0)).map(s=>(
-                    <tr key={s.id} className="row" style={{ borderBottom:"1px solid #161616" }}>
-                      <td style={{ padding:"10px 14px", color:"#ccc" }}>{s.name}</td>
+                    <tr key={s.id} className="row" style={{ borderBottom:"1px solid #f0e9e0" }}>
+                      <td style={{ padding:"10px 14px", color:"#4a3a2a" }}>{s.name}</td>
                       <TD dim>{s.carrier||"—"}</TD>
-                      <td style={{ padding:"10px 14px",...NUM,fontSize:11,color:"#666" }}>{s.trackingNo||"—"}</td>
-                      <td style={{ padding:"10px 14px",fontSize:11,color:"#777" }}>{s.from&&s.to?`${s.from} → ${s.to}`:"—"}</td>
+                      <td style={{ padding:"10px 14px",...NUM,fontSize:11,color:"#7a6a58" }}>{s.trackingNo||"—"}</td>
+                      <td style={{ padding:"10px 14px",fontSize:11,color:"#8a7a68" }}>{s.from&&s.to?`${s.from} → ${s.to}`:"—"}</td>
                       <TD mono dim>{s.sent||"—"}</TD>
                       <TD mono dim>{s.arrived||s.eta||"—"}</TD>
                       <TD mono>{s.cost?fmtC(s.cost):"—"}</TD>
-                      <td style={{ padding:"10px 14px",fontSize:11,color:s.insured?"#5de08a":"#555" }}>{s.insured?fmtC(s.insuredValue):"No"}</td>
+                      <td style={{ padding:"10px 14px",fontSize:11,color:s.insured?"#10b981":"#9a8a78" }}>{s.insured?fmtC(s.insuredValue):"No"}</td>
                       <td style={{ padding:"10px 14px" }}><Badge status={s.status}/></td>
                     </tr>
                   ))}
@@ -1072,27 +1088,27 @@ export default function CardVault() {
             <h1 style={{ ...H1, margin:0, flex:1 }}>P&L Analysis</h1>
             <div style={{ display:"flex", gap:4 }}>
               {[["all","All Time"],["3","3M"],["6","6M"],["12","12M"]].map(([v,l])=>(
-                <button key={v} onClick={()=>setPeriod(v)} className="pill" style={{ background:period===v?"#c9a84c":"#181818", color:period===v?"#0d0d0d":"#555", fontWeight:period===v?700:400 }}>{l}</button>
+                <button key={v} onClick={()=>setPeriod(v)} className="pill" style={{ background:period===v?"#f59e0b":"#ffffff", color:period===v?"#f5f0eb":"#9a8a78", fontWeight:period===v?700:400 }}>{l}</button>
               ))}
             </div>
           </div>
           <div className="kpi6" style={{ display:"grid", gridTemplateColumns:"repeat(6,1fr)", gap:10, marginBottom:16 }}>
-            {[["Net P&L",fmtC(pnlCards.reduce((a,c)=>a+netProf(c),0)),"#c9a84c"],["Revenue",fmtC(pnlCards.reduce((a,c)=>a+c.askingPrice,0)),"#f0ebe0"],["Cost Basis",fmtC(pnlCards.reduce((a,c)=>a+c.cost,0)),"#666"],["Grading",fmtC(pnlCards.reduce((a,c)=>a+(c.gradingCost||0),0)),"#9333ea"],["Avg Margin",pnlCards.length?pct(pnlCards.reduce((a,c)=>a+netMarg(c),0)/pnlCards.length):"—","#5de08a"],["Deals",pnlCards.length,"#aaa"]].map(([l,v,a])=><Kpi key={l} label={l} value={v} accent={a} small/>)}
+            {[["Net P&L",fmtC(pnlCards.reduce((a,c)=>a+netProf(c),0)),"#f59e0b"],["Revenue",fmtC(pnlCards.reduce((a,c)=>a+c.askingPrice,0)),"#2d2318"],["Cost Basis",fmtC(pnlCards.reduce((a,c)=>a+c.cost,0)),"#7a6a58"],["Grading",fmtC(pnlCards.reduce((a,c)=>a+(c.gradingCost||0),0)),"#8b5cf6"],["Avg Margin",pnlCards.length?pct(pnlCards.reduce((a,c)=>a+netMarg(c),0)/pnlCards.length):"—","#10b981"],["Deals",pnlCards.length,"#7a6a58"]].map(([l,v,a])=><Kpi key={l} label={l} value={v} accent={a} small/>)}
           </div>
           <div className="two-col" style={{ display:"grid", gridTemplateColumns:"3fr 2fr", gap:14, marginBottom:14 }}>
             <div style={CARD}><div style={SH}>Cumulative Net P&L</div>
-              <ResponsiveContainer width="100%" height={175}><LineChart data={monthly}><XAxis dataKey="label" tick={{fill:"#555",fontSize:10}} axisLine={false} tickLine={false}/><YAxis tick={{fill:"#555",fontSize:10,...NUM}} axisLine={false} tickLine={false} tickFormatter={v=>"€"+(v/1000).toFixed(0)+"k"}/><Tooltip content={<ChartTip/>}/><Line type="monotone" dataKey="cumulative" name="Cumulative P&L" stroke="#c9a84c" strokeWidth={2} dot={{fill:"#c9a84c",r:3}}/></LineChart></ResponsiveContainer>
+              <ResponsiveContainer width="100%" height={175}><LineChart data={monthly}><XAxis dataKey="label" tick={{fill:"#9a8a78",fontSize:10}} axisLine={false} tickLine={false}/><YAxis tick={{fill:"#9a8a78",fontSize:10,...NUM}} axisLine={false} tickLine={false} tickFormatter={v=>"€"+(v/1000).toFixed(0)+"k"}/><Tooltip content={<ChartTip/>}/><Line type="monotone" dataKey="cumulative" name="Cumulative P&L" stroke="#f59e0b" strokeWidth={2} dot={{fill:"#f59e0b",r:3}}/></LineChart></ResponsiveContainer>
             </div>
             <div style={CARD}><div style={SH}>Monthly Margin %</div>
-              <ResponsiveContainer width="100%" height={175}><BarChart data={monthly} barSize={16}><XAxis dataKey="label" tick={{fill:"#555",fontSize:10}} axisLine={false} tickLine={false}/><YAxis tick={{fill:"#555",fontSize:10,...NUM}} axisLine={false} tickLine={false} tickFormatter={v=>v+"%"}/><Tooltip content={<ChartTip/>}/><Bar dataKey="marginPct" name="Margin %" fill="#3a7bd5" radius={[4,4,0,0]}/></BarChart></ResponsiveContainer>
+              <ResponsiveContainer width="100%" height={175}><BarChart data={monthly} barSize={16}><XAxis dataKey="label" tick={{fill:"#9a8a78",fontSize:10}} axisLine={false} tickLine={false}/><YAxis tick={{fill:"#9a8a78",fontSize:10,...NUM}} axisLine={false} tickLine={false} tickFormatter={v=>v+"%"}/><Tooltip content={<ChartTip/>}/><Bar dataKey="marginPct" name="Margin %" fill="#3b82f6" radius={[4,4,0,0]}/></BarChart></ResponsiveContainer>
             </div>
           </div>
           <div className="two-col" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:14, marginBottom:14 }}>
             <div style={CARD}><div style={SH}>P&L by Set</div>
-              <ResponsiveContainer width="100%" height={185}><BarChart data={setStats.filter(s=>s.sold>0)} layout="vertical" barSize={12}><XAxis type="number" tick={{fill:"#555",fontSize:10,...NUM}} axisLine={false} tickLine={false} tickFormatter={v=>"€"+(v/1000).toFixed(0)+"k"}/><YAxis dataKey="set" type="category" tick={{fill:"#aaa",fontSize:10}} axisLine={false} tickLine={false} width={110}/><Tooltip content={<ChartTip/>}/><Bar dataKey="profit" name="Net Profit" radius={[0,4,4,0]}>{setStats.map((s,i)=><Cell key={i} fill={sc(s.set)}/>)}</Bar></BarChart></ResponsiveContainer>
+              <ResponsiveContainer width="100%" height={185}><BarChart data={setStats.filter(s=>s.sold>0)} layout="vertical" barSize={12}><XAxis type="number" tick={{fill:"#9a8a78",fontSize:10,...NUM}} axisLine={false} tickLine={false} tickFormatter={v=>"€"+(v/1000).toFixed(0)+"k"}/><YAxis dataKey="set" type="category" tick={{fill:"#7a6a58",fontSize:10}} axisLine={false} tickLine={false} width={110}/><Tooltip content={<ChartTip/>}/><Bar dataKey="profit" name="Net Profit" radius={[0,4,4,0]}>{setStats.map((s,i)=><Cell key={i} fill={sc(s.set)}/>)}</Bar></BarChart></ResponsiveContainer>
             </div>
             <div style={CARD}><div style={SH}>Margin % by Set</div>
-              <ResponsiveContainer width="100%" height={185}><BarChart data={setStats.filter(s=>s.sold>0)} layout="vertical" barSize={12}><XAxis type="number" tick={{fill:"#555",fontSize:10,...NUM}} axisLine={false} tickLine={false} tickFormatter={v=>v+"%"}/><YAxis dataKey="set" type="category" tick={{fill:"#aaa",fontSize:10}} axisLine={false} tickLine={false} width={110}/><Tooltip content={<ChartTip/>}/><Bar dataKey="avgMarginPct" name="Avg Margin %" radius={[0,4,4,0]}>{setStats.map((s,i)=><Cell key={i} fill={sc(s.set)}/>)}</Bar></BarChart></ResponsiveContainer>
+              <ResponsiveContainer width="100%" height={185}><BarChart data={setStats.filter(s=>s.sold>0)} layout="vertical" barSize={12}><XAxis type="number" tick={{fill:"#9a8a78",fontSize:10,...NUM}} axisLine={false} tickLine={false} tickFormatter={v=>v+"%"}/><YAxis dataKey="set" type="category" tick={{fill:"#7a6a58",fontSize:10}} axisLine={false} tickLine={false} width={110}/><Tooltip content={<ChartTip/>}/><Bar dataKey="avgMarginPct" name="Avg Margin %" radius={[0,4,4,0]}>{setStats.map((s,i)=><Cell key={i} fill={sc(s.set)}/>)}</Bar></BarChart></ResponsiveContainer>
             </div>
           </div>
           <div style={{ ...CARD, padding:0, overflow:"hidden" }}>
@@ -1103,29 +1119,29 @@ export default function CardVault() {
                 <tbody>
                   {[...pnlCards].sort((a,b)=>new Date(b.soldDate)-new Date(a.soldDate)).map(c=>{
                     const np=netProf(c),nm=netMarg(c),sup=suppliers.find(s=>s.id===c.supplierId);
-                    return <tr key={c.id} className="row" style={{ borderBottom:"1px solid #161616" }}>
+                    return <tr key={c.id} className="row" style={{ borderBottom:"1px solid #f0e9e0" }}>
                       <TD mono dim>{c.soldDate}</TD>
-                      <td style={{ padding:"10px 14px", color:"#ddd", fontWeight:500 }}>{c.name}</td>
-                      <td style={{ padding:"10px 14px", color:"#777", fontSize:11 }}>{c.set}</td>
+                      <td style={{ padding:"10px 14px", color:"#3d3025", fontWeight:500 }}>{c.name}</td>
+                      <td style={{ padding:"10px 14px", color:"#8a7a68", fontSize:11 }}>{c.set}</td>
                       <TD mono dim>{c.cardNo}</TD>
-                      <td style={{ padding:"10px 14px", fontSize:11, color:"#9333ea" }}>{c.grade}</td>
+                      <td style={{ padding:"10px 14px", fontSize:11, color:"#8b5cf6" }}>{c.grade}</td>
                       <TD mono>{fmtC(c.cost)}</TD>
-                      <td style={{ padding:"10px 14px",...NUM,fontSize:11,color:c.gradingCost?"#9333ea":"#555" }}>{c.gradingCost?fmtC(c.gradingCost):"—"}</td>
+                      <td style={{ padding:"10px 14px",...NUM,fontSize:11,color:c.gradingCost?"#8b5cf6":"#9a8a78" }}>{c.gradingCost?fmtC(c.gradingCost):"—"}</td>
                       <TD mono>{fmtC(c.askingPrice)}</TD>
-                      <td style={{ padding:"10px 14px",...NUM,fontWeight:600,color:np>=0?"#5de08a":"#e85d04" }}>{fmtC(np)}</td>
-                      <td style={{ padding:"10px 14px",...NUM,color:nm>=0.15?"#5de08a":nm>=0.05?"#c9a84c":"#e85d04" }}>{pct(nm)}</td>
+                      <td style={{ padding:"10px 14px",...NUM,fontWeight:600,color:np>=0?"#10b981":"#ef4444" }}>{fmtC(np)}</td>
+                      <td style={{ padding:"10px 14px",...NUM,color:nm>=0.15?"#10b981":nm>=0.05?"#f59e0b":"#ef4444" }}>{pct(nm)}</td>
                       <TD mono dim>{holdDays(c)??"-"}</TD>
                       <TD dim>{sup?.name||"—"}</TD>
                     </tr>;
                   })}
                 </tbody>
-                <tfoot><tr style={{ borderTop:"1px solid #2e2e2e", background:"#121212" }}>
-                  <td colSpan={5} style={{ padding:"10px 14px",color:"#444",fontSize:10,textTransform:"uppercase",letterSpacing:"0.07em" }}>Total / Avg</td>
+                <tfoot><tr style={{ borderTop:"1px solid #e0d5c8", background:"#f0eae2" }}>
+                  <td colSpan={5} style={{ padding:"10px 14px",color:"#b0a090",fontSize:10,textTransform:"uppercase",letterSpacing:"0.07em" }}>Total / Avg</td>
                   <TD mono>{fmtC(pnlCards.reduce((a,c)=>a+c.cost,0))}</TD>
-                  <td style={{ padding:"10px 14px",...NUM,color:"#9333ea" }}>{fmtC(pnlCards.reduce((a,c)=>a+(c.gradingCost||0),0))}</td>
+                  <td style={{ padding:"10px 14px",...NUM,color:"#8b5cf6" }}>{fmtC(pnlCards.reduce((a,c)=>a+(c.gradingCost||0),0))}</td>
                   <TD mono>{fmtC(pnlCards.reduce((a,c)=>a+c.askingPrice,0))}</TD>
-                  <td style={{ padding:"10px 14px",...NUM,fontWeight:600,color:"#c9a84c" }}>{fmtC(pnlCards.reduce((a,c)=>a+netProf(c),0))}</td>
-                  <td style={{ padding:"10px 14px",...NUM,color:"#5de08a" }}>{pnlCards.length?pct(pnlCards.reduce((a,c)=>a+netMarg(c),0)/pnlCards.length):"—"}</td>
+                  <td style={{ padding:"10px 14px",...NUM,fontWeight:600,color:"#f59e0b" }}>{fmtC(pnlCards.reduce((a,c)=>a+netProf(c),0))}</td>
+                  <td style={{ padding:"10px 14px",...NUM,color:"#10b981" }}>{pnlCards.length?pct(pnlCards.reduce((a,c)=>a+netMarg(c),0)/pnlCards.length):"—"}</td>
                   <td colSpan={2}/>
                 </tr></tfoot>
               </table>
@@ -1137,41 +1153,41 @@ export default function CardVault() {
         {tab==="Suppliers"&&<>
           <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:18 }}>
             <h1 style={{ ...H1, margin:0, flex:1 }}>Suppliers</h1>
-            {isAdmin&&<button onClick={()=>setSm("new")} style={{ background:"#c9a84c", border:"none", borderRadius:8, padding:"7px 18px", color:"#0d0d0d", fontWeight:700, fontSize:12, cursor:"pointer" }}>+ Add Supplier</button>}
+            {isAdmin&&<button onClick={()=>setSm("new")} style={{ background:"#f59e0b", border:"none", borderRadius:8, padding:"7px 18px", color:"#f5f0eb", fontWeight:700, fontSize:12, cursor:"pointer" }}>+ Add Supplier</button>}
           </div>
           <div className="kpi4" style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:12, marginBottom:18 }}>
             <Kpi label="Total Suppliers" value={suppliers.length}/>
-            <Kpi label="Top Source"      value={[...supStats].sort((a,b)=>b.totalP-a.totalP)[0]?.name.split(" ")[0]||"—"} accent="#c9a84c"/>
-            <Kpi label="Avg Reliability" value={(suppliers.reduce((a,s)=>a+s.reliability,0)/Math.max(1,suppliers.length)).toFixed(1)+" / 5"} accent="#5de08a"/>
+            <Kpi label="Top Source"      value={[...supStats].sort((a,b)=>b.totalP-a.totalP)[0]?.name.split(" ")[0]||"—"} accent="#f59e0b"/>
+            <Kpi label="Avg Reliability" value={(suppliers.reduce((a,s)=>a+s.reliability,0)/Math.max(1,suppliers.length)).toFixed(1)+" / 5"} accent="#10b981"/>
             <Kpi label="Cards Sourced"   value={cards.filter(c=>c.supplierId).length}/>
           </div>
           <div style={{ display:"flex", flexDirection:"column", gap:12 }}>
             {supStats.map(s=>(
               <div key={s.id} style={{ ...CARD, display:"flex", gap:16, alignItems:"flex-start", padding:"18px 20px", flexWrap:"wrap" }}>
-                <div style={{ width:40,height:40,borderRadius:"50%",background:"#1e1e1e",border:"1.5px solid #2e2e2e",display:"flex",alignItems:"center",justifyContent:"center",fontSize:18,flexShrink:0 }}>🃏</div>
+                <div style={{ width:40,height:40,borderRadius:"50%",background:"#ece6df",border:"1.5px solid #e0d5c8",display:"flex",alignItems:"center",justifyContent:"center",fontSize:18,flexShrink:0 }}><PokeBall size={20}/></div>
                 <div style={{ flex:1, minWidth:200 }}>
                   <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:3, flexWrap:"wrap" }}>
                     <span style={{ fontFamily:"'Syne',sans-serif", fontSize:14, fontWeight:600 }}>{s.name}</span>
-                    <span style={{ fontSize:10, padding:"2px 8px", borderRadius:20, background:"#222", color:"#666" }}>{s.type}</span>
-                    <span style={{ fontSize:11, color:"#444" }}>{[s.city,s.country].filter(Boolean).join(", ")}</span>
+                    <span style={{ fontSize:10, padding:"2px 8px", borderRadius:20, background:"#e8ddd3", color:"#7a6a58" }}>{s.type}</span>
+                    <span style={{ fontSize:11, color:"#b0a090" }}>{[s.city,s.country].filter(Boolean).join(", ")}</span>
                   </div>
                   <Stars n={s.reliability}/>
-                  <div style={{ fontSize:12, color:"#555", marginTop:4, marginBottom:5 }}>{s.notes}</div>
-                  {s.tags?.length>0&&<div style={{ display:"flex", gap:5, flexWrap:"wrap" }}>{s.tags.map(t=><span key={t} style={{ fontSize:10,padding:"2px 8px",borderRadius:20,background:"#161616",color:"#555",border:"1px solid #222" }}>{t}</span>)}</div>}
+                  <div style={{ fontSize:12, color:"#9a8a78", marginTop:4, marginBottom:5 }}>{s.notes}</div>
+                  {s.tags?.length>0&&<div style={{ display:"flex", gap:5, flexWrap:"wrap" }}>{s.tags.map(t=><span key={t} style={{ fontSize:10,padding:"2px 8px",borderRadius:20,background:"#f0e9e0",color:"#9a8a78",border:"1px solid #222" }}>{t}</span>)}</div>}
                   <div style={{ display:"flex", gap:14, marginTop:7 }}>
-                    {s.email&&<span style={{ fontSize:11,color:"#3a7bd5" }}>✉ {s.email}</span>}
-                    {s.phone&&<span style={{ fontSize:11,color:"#555" }}>☎ {s.phone}</span>}
+                    {s.email&&<span style={{ fontSize:11,color:"#3b82f6" }}>✉ {s.email}</span>}
+                    {s.phone&&<span style={{ fontSize:11,color:"#9a8a78" }}>☎ {s.phone}</span>}
                   </div>
                 </div>
                 <div style={{ display:"flex", gap:14, alignItems:"center", flexWrap:"wrap" }}>
-                  {[["Net P&L",fmtC(s.totalP),s.totalP>0?"#5de08a":"#666"],["Avg Margin",s.avgM>0?pct(s.avgM):"—","#c9a84c"],["Cards",s.wCount,"#aaa"],["Disc.",s.avgDiscount+"%","#aaa"]].map(([l,v,c])=>(
+                  {[["Net P&L",fmtC(s.totalP),s.totalP>0?"#10b981":"#7a6a58"],["Avg Margin",s.avgM>0?pct(s.avgM):"—","#f59e0b"],["Cards",s.wCount,"#7a6a58"],["Disc.",s.avgDiscount+"%","#7a6a58"]].map(([l,v,c])=>(
                     <div key={l} style={{ textAlign:"right" }}>
-                      <div style={{ fontSize:10,color:"#444",marginBottom:2,textTransform:"uppercase",letterSpacing:"0.07em" }}>{l}</div>
+                      <div style={{ fontSize:10,color:"#b0a090",marginBottom:2,textTransform:"uppercase",letterSpacing:"0.07em" }}>{l}</div>
                       <div style={{ ...NUM,fontSize:14,color:c }}>{v}</div>
                     </div>
                   ))}
                   {isAdmin&&<button className="ghost" onClick={()=>setSm(s)}>Edit</button>}
-                  {isAdmin&&<button className="ghost" style={{ color:"#e85d04",borderColor:"#3a1a1a" }} onClick={()=>deleteSupplier(s.id)}>🗑</button>}
+                  {isAdmin&&<button className="ghost" style={{ color:"#ef4444",borderColor:"#3a1a1a" }} onClick={()=>deleteSupplier(s.id)}>🗑</button>}
                 </div>
               </div>
             ))}
@@ -1183,15 +1199,15 @@ export default function CardVault() {
           <h1 style={H1}>Sales History</h1>
           <div className="two-col" style={{ display:"grid", gridTemplateColumns:"3fr 2fr", gap:14, marginBottom:14 }}>
             <div style={CARD}><div style={SH}>Cumulative Profit</div>
-              <ResponsiveContainer width="100%" height={180}><LineChart data={monthly}><XAxis dataKey="label" tick={{fill:"#555",fontSize:10}} axisLine={false} tickLine={false}/><YAxis tick={{fill:"#555",fontSize:10,...NUM}} axisLine={false} tickLine={false} tickFormatter={v=>"€"+(v/1000).toFixed(0)+"k"}/><Tooltip content={<ChartTip/>}/><Line type="monotone" dataKey="cumulative" name="Cumulative P&L" stroke="#c9a84c" strokeWidth={2} dot={{fill:"#c9a84c",r:3}}/></LineChart></ResponsiveContainer>
+              <ResponsiveContainer width="100%" height={180}><LineChart data={monthly}><XAxis dataKey="label" tick={{fill:"#9a8a78",fontSize:10}} axisLine={false} tickLine={false}/><YAxis tick={{fill:"#9a8a78",fontSize:10,...NUM}} axisLine={false} tickLine={false} tickFormatter={v=>"€"+(v/1000).toFixed(0)+"k"}/><Tooltip content={<ChartTip/>}/><Line type="monotone" dataKey="cumulative" name="Cumulative P&L" stroke="#f59e0b" strokeWidth={2} dot={{fill:"#f59e0b",r:3}}/></LineChart></ResponsiveContainer>
             </div>
             <div style={CARD}><div style={SH}>Margin Bands</div>
               {[["0–10%",0,0.1],["10–20%",0.1,0.2],["20–30%",0.2,0.3],["30%+",0.3,Infinity]].map(([range,lo,hi])=>{
                 const cnt=sold.filter(c=>{const m=netMarg(c);return m>=lo&&m<hi;}).length,p=sold.length?(cnt/sold.length)*100:0;
                 return <div key={range} style={{ display:"flex", alignItems:"center", gap:10, marginBottom:10 }}>
-                  <span style={{ ...NUM, fontSize:11, color:"#555", width:50 }}>{range}</span>
-                  <div style={{ flex:1, height:7, background:"#1e1e1e", borderRadius:4, overflow:"hidden" }}><div style={{ height:"100%", width:p+"%", background:"#c9a84c", borderRadius:4 }}/></div>
-                  <span style={{ ...NUM, fontSize:12, color:"#888", width:16, textAlign:"right" }}>{cnt}</span>
+                  <span style={{ ...NUM, fontSize:11, color:"#9a8a78", width:50 }}>{range}</span>
+                  <div style={{ flex:1, height:7, background:"#ece6df", borderRadius:4, overflow:"hidden" }}><div style={{ height:"100%", width:p+"%", background:"#f59e0b", borderRadius:4 }}/></div>
+                  <span style={{ ...NUM, fontSize:12, color:"#9a8a78", width:16, textAlign:"right" }}>{cnt}</span>
                 </div>;
               })}
             </div>
@@ -1202,17 +1218,17 @@ export default function CardVault() {
                 <thead><tr style={{ borderBottom:"1px solid #222" }}>{["Date","Card","Set","No.","Grade","Cost","Grading","Sold For","Net Profit","Margin","Hold Days"].map(h=><TH key={h}>{h}</TH>)}</tr></thead>
                 <tbody>
                   {[...sold].sort((a,b)=>new Date(b.soldDate)-new Date(a.soldDate)).map(c=>(
-                    <tr key={c.id} className="row" style={{ borderBottom:"1px solid #161616" }}>
+                    <tr key={c.id} className="row" style={{ borderBottom:"1px solid #f0e9e0" }}>
                       <TD mono dim>{c.soldDate}</TD>
-                      <td style={{ padding:"10px 14px", color:"#ddd", fontWeight:500 }}>{c.name}</td>
-                      <td style={{ padding:"10px 14px", color:"#777", fontSize:11 }}>{c.set}</td>
+                      <td style={{ padding:"10px 14px", color:"#3d3025", fontWeight:500 }}>{c.name}</td>
+                      <td style={{ padding:"10px 14px", color:"#8a7a68", fontSize:11 }}>{c.set}</td>
                       <TD mono dim>{c.cardNo}</TD>
-                      <td style={{ padding:"10px 14px", fontSize:11, color:"#9333ea" }}>{c.grade}</td>
+                      <td style={{ padding:"10px 14px", fontSize:11, color:"#8b5cf6" }}>{c.grade}</td>
                       <TD mono>{fmtC(c.cost)}</TD>
-                      <td style={{ padding:"10px 14px",...NUM,fontSize:11,color:c.gradingCost?"#9333ea":"#555" }}>{c.gradingCost?fmtC(c.gradingCost):"—"}</td>
+                      <td style={{ padding:"10px 14px",...NUM,fontSize:11,color:c.gradingCost?"#8b5cf6":"#9a8a78" }}>{c.gradingCost?fmtC(c.gradingCost):"—"}</td>
                       <TD mono>{fmtC(c.askingPrice)}</TD>
-                      <td style={{ padding:"10px 14px",...NUM,fontWeight:600,color:netProf(c)>=0?"#5de08a":"#e85d04" }}>{fmtC(netProf(c))}</td>
-                      <td style={{ padding:"10px 14px",...NUM,color:netMarg(c)>=0.15?"#5de08a":netMarg(c)>=0.05?"#c9a84c":"#e85d04" }}>{pct(netMarg(c))}</td>
+                      <td style={{ padding:"10px 14px",...NUM,fontWeight:600,color:netProf(c)>=0?"#10b981":"#ef4444" }}>{fmtC(netProf(c))}</td>
+                      <td style={{ padding:"10px 14px",...NUM,color:netMarg(c)>=0.15?"#10b981":netMarg(c)>=0.05?"#f59e0b":"#ef4444" }}>{pct(netMarg(c))}</td>
                       <TD mono dim>{holdDays(c)??"-"}</TD>
                     </tr>
                   ))}
@@ -1228,21 +1244,21 @@ export default function CardVault() {
           <div className="two-col" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:14, marginBottom:14 }}>
             <div style={CARD}>
               <div style={SH}>Margin vs Hold Days</div>
-              <div style={{ fontSize:11, color:"#555", marginBottom:10 }}>Each dot = one flip. Bigger = higher cost. Line = trend.</div>
+              <div style={{ fontSize:11, color:"#9a8a78", marginBottom:10 }}>Each dot = one flip. Bigger = higher cost. Line = trend.</div>
               <ResponsiveContainer width="100%" height={200}>
                 <ScatterChart>
-                  <CartesianGrid stroke="#1e1e1e" strokeDasharray="3 3"/>
-                  <XAxis type="number" dataKey="x" name="Hold Days" tick={{fill:"#555",fontSize:10,...NUM}} axisLine={false} tickLine={false}/>
-                  <YAxis type="number" dataKey="y" name="Margin %" tick={{fill:"#555",fontSize:10,...NUM}} axisLine={false} tickLine={false} tickFormatter={v=>v+"%"}/>
+                  <CartesianGrid stroke="#ece6df" strokeDasharray="3 3"/>
+                  <XAxis type="number" dataKey="x" name="Hold Days" tick={{fill:"#9a8a78",fontSize:10,...NUM}} axisLine={false} tickLine={false}/>
+                  <YAxis type="number" dataKey="y" name="Margin %" tick={{fill:"#9a8a78",fontSize:10,...NUM}} axisLine={false} tickLine={false} tickFormatter={v=>v+"%"}/>
                   <ZAxis dataKey="z" range={[40,200]}/>
-                  <Tooltip cursor={{stroke:"#2e2e2e"}} content={({active,payload})=>{if(!active||!payload?.length)return null;const d=payload[0].payload;return<div style={{background:"#181818",border:"1px solid #2e2e2e",borderRadius:8,padding:"8px 12px",fontSize:12}}><div style={{color:"#888",marginBottom:3}}>{d.name}</div><div style={{...NUM,color:"#c9a84c"}}>{d.y}% margin · {d.x}d</div></div>;}}/>
+                  <Tooltip cursor={{stroke:"#e0d5c8"}} content={({active,payload})=>{if(!active||!payload?.length)return null;const d=payload[0].payload;return<div style={{background:"#ffffff",border:"1px solid #e0d5c8",borderRadius:8,padding:"8px 12px",fontSize:12}}><div style={{color:"#9a8a78",marginBottom:3}}>{d.name}</div><div style={{...NUM,color:"#f59e0b"}}>{d.y}% margin · {d.x}d</div></div>;}}/>
                   <Scatter data={scatterData} fillOpacity={0.85}>{scatterData.map((d,i)=><Cell key={i} fill={sc(d.set)}/>)}</Scatter>
-                  {scatterData.length>=2&&(()=>{const n=scatterData.length,sx=scatterData.reduce((a,d)=>a+d.x,0),sy=scatterData.reduce((a,d)=>a+d.y,0),sxy=scatterData.reduce((a,d)=>a+d.x*d.y,0),sxx=scatterData.reduce((a,d)=>a+d.x*d.x,0),slope=(n*sxy-sx*sy)/(n*sxx-sx*sx||1),intercept=(sy-slope*sx)/n,xs=[Math.min(...scatterData.map(d=>d.x)),Math.max(...scatterData.map(d=>d.x))];return<Line data={xs.map(x=>({x,y:+(slope*x+intercept).toFixed(1)}))} type="linear" dataKey="y" stroke="#c9a84c44" strokeWidth={1.5} strokeDasharray="4 3" dot={false} legendType="none"/>;})()}
+                  {scatterData.length>=2&&(()=>{const n=scatterData.length,sx=scatterData.reduce((a,d)=>a+d.x,0),sy=scatterData.reduce((a,d)=>a+d.y,0),sxy=scatterData.reduce((a,d)=>a+d.x*d.y,0),sxx=scatterData.reduce((a,d)=>a+d.x*d.x,0),slope=(n*sxy-sx*sy)/(n*sxx-sx*sx||1),intercept=(sy-slope*sx)/n,xs=[Math.min(...scatterData.map(d=>d.x)),Math.max(...scatterData.map(d=>d.x))];return<Line data={xs.map(x=>({x,y:+(slope*x+intercept).toFixed(1)}))} type="linear" dataKey="y" stroke="#f59e0b44" strokeWidth={1.5} strokeDasharray="4 3" dot={false} legendType="none"/>;})()}
                 </ScatterChart>
               </ResponsiveContainer>
             </div>
             <div style={CARD}><div style={SH}>Sales by Month</div>
-              <ResponsiveContainer width="100%" height={200}><BarChart data={monthlyCount} barSize={20}><XAxis dataKey="month" tick={{fill:"#555",fontSize:10}} axisLine={false} tickLine={false}/><YAxis tick={{fill:"#555",fontSize:10,...NUM}} axisLine={false} tickLine={false}/><Tooltip content={<ChartTip/>}/><Bar dataKey="count" name="Cards Sold" fill="#3a7bd5" radius={[4,4,0,0]}/></BarChart></ResponsiveContainer>
+              <ResponsiveContainer width="100%" height={200}><BarChart data={monthlyCount} barSize={20}><XAxis dataKey="month" tick={{fill:"#9a8a78",fontSize:10}} axisLine={false} tickLine={false}/><YAxis tick={{fill:"#9a8a78",fontSize:10,...NUM}} axisLine={false} tickLine={false}/><Tooltip content={<ChartTip/>}/><Bar dataKey="count" name="Cards Sold" fill="#3b82f6" radius={[4,4,0,0]}/></BarChart></ResponsiveContainer>
             </div>
           </div>
           <div className="two-col" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:14, marginBottom:14 }}>
@@ -1251,10 +1267,10 @@ export default function CardVault() {
               <div style={{ display:"flex", flexDirection:"column", gap:8 }}>
                 {setStats.filter(s=>s.sold>0).map(s=>{const eff=s.cost?s.profit/s.cost:0,maxEff=Math.max(...setStats.filter(x=>x.sold>0).map(x=>x.cost?x.profit/x.cost:0));return(
                   <div key={s.set} style={{ display:"flex", alignItems:"center", gap:10 }}>
-                    <span style={{ fontSize:12 }}>{SETS.find(x=>x.n===s.set)?.f||"🃏"}</span>
-                    <span style={{ fontSize:11, color:"#888", width:100, flexShrink:0, whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis" }}>{s.set}</span>
-                    <div style={{ flex:1, height:7, background:"#1e1e1e", borderRadius:4, overflow:"hidden" }}><div style={{ height:"100%", width:`${(eff/maxEff)*100}%`, background:sc(s.set), borderRadius:4 }}/></div>
-                    <span style={{ ...NUM, fontSize:12, color:"#c9a84c", width:50, textAlign:"right" }}>{pct(eff)}</span>
+                    <span style={{ fontSize:12 }}>{SETS.find(x=>x.n===s.set)?.f||"⚡"}</span>
+                    <span style={{ fontSize:11, color:"#9a8a78", width:100, flexShrink:0, whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis" }}>{s.set}</span>
+                    <div style={{ flex:1, height:7, background:"#ece6df", borderRadius:4, overflow:"hidden" }}><div style={{ height:"100%", width:`${(eff/maxEff)*100}%`, background:sc(s.set), borderRadius:4 }}/></div>
+                    <span style={{ ...NUM, fontSize:12, color:"#f59e0b", width:50, textAlign:"right" }}>{pct(eff)}</span>
                   </div>
                 );})}
               </div>
@@ -1263,15 +1279,15 @@ export default function CardVault() {
               <div style={SH}>Supplier ROI Ranking</div>
               <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
                 {[...supStats].sort((a,b)=>b.avgM-a.avgM).map((s,i)=>(
-                  <div key={s.id} style={{ display:"flex", alignItems:"center", gap:12, padding:"10px 14px", background:"#121212", borderRadius:10 }}>
-                    <span style={{ ...NUM,fontSize:13,color:"#444",width:18 }}>#{i+1}</span>
+                  <div key={s.id} style={{ display:"flex", alignItems:"center", gap:12, padding:"10px 14px", background:"#f0eae2", borderRadius:10 }}>
+                    <span style={{ ...NUM,fontSize:13,color:"#b0a090",width:18 }}>#{i+1}</span>
                     <div style={{ flex:1 }}>
-                      <div style={{ fontSize:12, color:"#ccc" }}>{s.name}</div>
-                      <div style={{ fontSize:10, color:"#555" }}>{s.sCount} sold · {s.avgDiscount}% disc</div>
+                      <div style={{ fontSize:12, color:"#4a3a2a" }}>{s.name}</div>
+                      <div style={{ fontSize:10, color:"#9a8a78" }}>{s.sCount} sold · {s.avgDiscount}% disc</div>
                     </div>
                     <div style={{ textAlign:"right" }}>
-                      <div style={{ ...NUM, fontSize:15, color:"#5de08a" }}>{s.avgM>0?pct(s.avgM):"—"}</div>
-                      <div style={{ fontSize:10, color:"#555" }}>avg margin</div>
+                      <div style={{ ...NUM, fontSize:15, color:"#10b981" }}>{s.avgM>0?pct(s.avgM):"—"}</div>
+                      <div style={{ fontSize:10, color:"#9a8a78" }}>avg margin</div>
                     </div>
                     <Stars n={s.reliability}/>
                   </div>
@@ -1285,10 +1301,10 @@ export default function CardVault() {
               {["Raw","PSA 7","PSA 8","PSA 9","PSA 10","BGS 9.5"].map(g=>{
                 const cs=sold.filter(c=>c.grade===g),avg=cs.length?cs.reduce((a,c)=>a+netMarg(c),0)/cs.length:null;
                 return(
-                  <div key={g} style={{ background:"#121212",borderRadius:10,padding:"14px 12px",textAlign:"center" }}>
-                    <div style={{ fontSize:10,color:"#555",marginBottom:6 }}>{g}</div>
-                    <div style={{ ...NUM,fontSize:17,color:avg===null?"#333":avg>=0.15?"#5de08a":avg>=0.05?"#c9a84c":"#e85d04" }}>{avg!==null?pct(avg):"—"}</div>
-                    <div style={{ fontSize:10,color:"#444",marginTop:4 }}>{cs.length} sold</div>
+                  <div key={g} style={{ background:"#f0eae2",borderRadius:10,padding:"14px 12px",textAlign:"center" }}>
+                    <div style={{ fontSize:10,color:"#9a8a78",marginBottom:6 }}>{g}</div>
+                    <div style={{ ...NUM,fontSize:17,color:avg===null?"#c0b0a0":avg>=0.15?"#10b981":avg>=0.05?"#f59e0b":"#ef4444" }}>{avg!==null?pct(avg):"—"}</div>
+                    <div style={{ fontSize:10,color:"#b0a090",marginTop:4 }}>{cs.length} sold</div>
                   </div>
                 );
               })}
@@ -1300,33 +1316,33 @@ export default function CardVault() {
         {tab==="Wishlist"&&<>
           <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:18 }}>
             <h1 style={{ ...H1, margin:0, flex:1 }}>Wishlist</h1>
-            {isAdmin&&<button onClick={()=>setWishlist(w=>[...w,{id:Date.now(),set:"",name:"",cardNo:"",year:"",targetBuy:0,marketEst:0,priority:"medium",notes:"",found:false}])} style={{ background:"#c9a84c", border:"none", borderRadius:8, padding:"7px 18px", color:"#0d0d0d", fontWeight:700, fontSize:12, cursor:"pointer" }}>+ Add</button>}
+            {isAdmin&&<button onClick={()=>setWishlist(w=>[...w,{id:Date.now(),set:"",name:"",cardNo:"",year:"",targetBuy:0,marketEst:0,priority:"medium",notes:"",found:false}])} style={{ background:"#f59e0b", border:"none", borderRadius:8, padding:"7px 18px", color:"#f5f0eb", fontWeight:700, fontSize:12, cursor:"pointer" }}>+ Add</button>}
           </div>
           <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
             {wishlist.map(item=>(
               <div key={item.id} style={{ ...CARD, padding:"16px 20px", display:"flex", gap:16, alignItems:"center", flexWrap:"wrap", opacity:item.found?0.5:1 }}>
                 <div style={{ flex:1, minWidth:200 }}>
                   <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:3, flexWrap:"wrap" }}>
-                    <span style={{ fontFamily:"'Syne',sans-serif", fontSize:14, fontWeight:600, color:item.found?"#666":"#f0ebe0" }}>{item.name||"—"}</span>
-                    <span style={{ fontSize:11, color:"#666" }}>{item.set}</span>
-                    <span style={{ fontSize:10,padding:"2px 8px",borderRadius:20,background:item.priority==="high"?"#2a1a0e":item.priority==="medium"?"#222":"#1a2a1a",color:item.priority==="high"?"#c9a84c":item.priority==="medium"?"#888":"#5de08a" }}>{item.priority}</span>
-                    {item.found&&<span style={{ fontSize:10,padding:"2px 8px",borderRadius:20,background:"#1a2f3a",color:"#3a7bd5" }}>found</span>}
+                    <span style={{ fontFamily:"'Syne',sans-serif", fontSize:14, fontWeight:600, color:item.found?"#7a6a58":"#2d2318" }}>{item.name||"—"}</span>
+                    <span style={{ fontSize:11, color:"#7a6a58" }}>{item.set}</span>
+                    <span style={{ fontSize:10,padding:"2px 8px",borderRadius:20,background:item.priority==="high"?"#fef3c7":item.priority==="medium"?"#e8ddd3":"#d1fae5",color:item.priority==="high"?"#f59e0b":item.priority==="medium"?"#9a8a78":"#10b981" }}>{item.priority}</span>
+                    {item.found&&<span style={{ fontSize:10,padding:"2px 8px",borderRadius:20,background:"#dbeafe",color:"#3b82f6" }}>found</span>}
                   </div>
-                  <div style={{ fontSize:11, color:"#555" }}>{item.cardNo} {item.year&&`· ${item.year}`} {item.notes&&`· ${item.notes}`}</div>
+                  <div style={{ fontSize:11, color:"#9a8a78" }}>{item.cardNo} {item.year&&`· ${item.year}`} {item.notes&&`· ${item.notes}`}</div>
                 </div>
                 <div style={{ display:"flex", gap:18, alignItems:"center", flexWrap:"wrap" }}>
-                  {[["Target Buy",item.targetBuy,"#c9a84c"],["Market Est.",item.marketEst,"#888"],["Upside",item.marketEst&&item.targetBuy?item.marketEst-item.targetBuy:null,(item.marketEst-item.targetBuy)>0?"#5de08a":"#e85d04"]].map(([l,v,c])=>(
+                  {[["Target Buy",item.targetBuy,"#f59e0b"],["Market Est.",item.marketEst,"#9a8a78"],["Upside",item.marketEst&&item.targetBuy?item.marketEst-item.targetBuy:null,(item.marketEst-item.targetBuy)>0?"#10b981":"#ef4444"]].map(([l,v,c])=>(
                     <div key={l} style={{ textAlign:"right" }}>
-                      <div style={{ fontSize:10,color:"#444",marginBottom:2 }}>{l}</div>
-                      <div style={{ ...NUM,fontSize:15,color:v?c:"#444" }}>{v?fmtC(v):"—"}</div>
+                      <div style={{ fontSize:10,color:"#b0a090",marginBottom:2 }}>{l}</div>
+                      <div style={{ ...NUM,fontSize:15,color:v?c:"#b0a090" }}>{v?fmtC(v):"—"}</div>
                     </div>
                   ))}
                   {isAdmin&&<button onClick={()=>setWishlist(w=>w.map(x=>x.id===item.id?{...x,found:!x.found}:x))} className="ghost">{item.found?"Unmark":"Mark Found"}</button>}
-                  {isAdmin&&<button onClick={()=>{if(window.confirm("Remove from wishlist?"))setWishlist(w=>w.filter(x=>x.id!==item.id));}} className="ghost" style={{ color:"#e85d04",borderColor:"#3a1a1a" }}>🗑</button>}
+                  {isAdmin&&<button onClick={()=>{if(window.confirm("Remove from wishlist?"))setWishlist(w=>w.filter(x=>x.id!==item.id));}} className="ghost" style={{ color:"#ef4444",borderColor:"#3a1a1a" }}>🗑</button>}
                 </div>
               </div>
             ))}
-            {!wishlist.length&&<div style={{ color:"#444",fontSize:13,textAlign:"center",padding:"40px 0" }}>No cards on wishlist yet</div>}
+            {!wishlist.length&&<div style={{ color:"#b0a090",fontSize:13,textAlign:"center",padding:"40px 0" }}>No cards on wishlist yet</div>}
           </div>
         </>}
 
@@ -1334,12 +1350,12 @@ export default function CardVault() {
         {tab==="Pipeline"&&<>
           <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:18 }}>
             <h1 style={{ ...H1, margin:0, flex:1 }}>Deal Pipeline</h1>
-            {isAdmin&&<button onClick={()=>setPipeline(p=>[...p,{id:Date.now(),set:"",name:"",cardNo:"",year:"",askingPrice:0,offerMade:0,status:"interested",supplierId:"",notes:"",lastContact:""}])} style={{ background:"#c9a84c", border:"none", borderRadius:8, padding:"7px 18px", color:"#0d0d0d", fontWeight:700, fontSize:12, cursor:"pointer" }}>+ Add Deal</button>}
+            {isAdmin&&<button onClick={()=>setPipeline(p=>[...p,{id:Date.now(),set:"",name:"",cardNo:"",year:"",askingPrice:0,offerMade:0,status:"interested",supplierId:"",notes:"",lastContact:""}])} style={{ background:"#f59e0b", border:"none", borderRadius:8, padding:"7px 18px", color:"#f5f0eb", fontWeight:700, fontSize:12, cursor:"pointer" }}>+ Add Deal</button>}
           </div>
           <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:12, marginBottom:18 }}>
-            {[["tracking","Tracking","#666"],["interested","Interested","#3a7bd5"],["negotiating","Negotiating","#c9a84c"]].map(([s,l,c])=>(
+            {[["tracking","Tracking","#7a6a58"],["interested","Interested","#3b82f6"],["negotiating","Negotiating","#f59e0b"]].map(([s,l,c])=>(
               <div key={s} style={{ ...CARD, textAlign:"center" }}>
-                <div style={{ fontSize:10,color:"#555",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:6 }}>{l}</div>
+                <div style={{ fontSize:10,color:"#9a8a78",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:6 }}>{l}</div>
                 <div style={{ ...NUM,fontSize:28,color:c }}>{pipeline.filter(p=>p.status===s).length}</div>
               </div>
             ))}
@@ -1352,32 +1368,32 @@ export default function CardVault() {
                   <div style={{ flex:1, minWidth:200 }}>
                     <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:4, flexWrap:"wrap" }}>
                       <span style={{ fontFamily:"'Syne',sans-serif", fontSize:14, fontWeight:600 }}>{item.name||"—"}</span>
-                      <span style={{ fontSize:11, color:"#666" }}>{item.set}</span>
+                      <span style={{ fontSize:11, color:"#7a6a58" }}>{item.set}</span>
                       <Badge status={item.status}/>
                     </div>
-                    <div style={{ fontSize:11, color:"#555" }}>{item.cardNo} {item.year&&`· ${item.year}`}{sup?` · ${sup.name}`:""}</div>
-                    <div style={{ fontSize:11, color:"#666", marginTop:4 }}>{item.notes}</div>
-                    {item.lastContact&&<div style={{ fontSize:10, color:"#444", marginTop:4 }}>Last contact: {item.lastContact}</div>}
+                    <div style={{ fontSize:11, color:"#9a8a78" }}>{item.cardNo} {item.year&&`· ${item.year}`}{sup?` · ${sup.name}`:""}</div>
+                    <div style={{ fontSize:11, color:"#7a6a58", marginTop:4 }}>{item.notes}</div>
+                    {item.lastContact&&<div style={{ fontSize:10, color:"#b0a090", marginTop:4 }}>Last contact: {item.lastContact}</div>}
                   </div>
                   <div style={{ display:"flex", gap:14, alignItems:"center", flexWrap:"wrap" }}>
-                    {[["Asking",item.askingPrice,"#888"],["Offer",item.offerMade,"#c9a84c"],["Gap",gap,gap>0?"#e85d04":"#5de08a"]].map(([l,v,c])=>(
+                    {[["Asking",item.askingPrice,"#9a8a78"],["Offer",item.offerMade,"#f59e0b"],["Gap",gap,gap>0?"#ef4444":"#10b981"]].map(([l,v,c])=>(
                       <div key={l} style={{ textAlign:"right" }}>
-                        <div style={{ fontSize:10,color:"#444",marginBottom:2 }}>{l}</div>
-                        <div style={{ ...NUM,fontSize:14,color:v?c:"#444" }}>{v?fmtC(v):"—"}</div>
+                        <div style={{ fontSize:10,color:"#b0a090",marginBottom:2 }}>{l}</div>
+                        <div style={{ ...NUM,fontSize:14,color:v?c:"#b0a090" }}>{v?fmtC(v):"—"}</div>
                       </div>
                     ))}
                     {isAdmin&&<div style={{ display:"flex", gap:5 }}>
                       {["tracking","interested","negotiating"].map(s=>(
                         <button key={s} onClick={()=>setPipeline(p=>p.map(x=>x.id===item.id?{...x,status:s}:x))}
-                          className="pill" style={{ background:item.status===s?"#c9a84c":"#181818", color:item.status===s?"#0d0d0d":"#666", fontWeight:item.status===s?700:400, fontSize:10, padding:"4px 8px" }}>{s}</button>
+                          className="pill" style={{ background:item.status===s?"#f59e0b":"#ffffff", color:item.status===s?"#f5f0eb":"#7a6a58", fontWeight:item.status===s?700:400, fontSize:10, padding:"4px 8px" }}>{s}</button>
                       ))}
-                      <button onClick={()=>{if(window.confirm("Remove from pipeline?"))setPipeline(p=>p.filter(x=>x.id!==item.id));}} className="ghost" style={{ color:"#e85d04",borderColor:"#3a1a1a" }}>🗑</button>
+                      <button onClick={()=>{if(window.confirm("Remove from pipeline?"))setPipeline(p=>p.filter(x=>x.id!==item.id));}} className="ghost" style={{ color:"#ef4444",borderColor:"#3a1a1a" }}>🗑</button>
                     </div>}
                   </div>
                 </div>
               );
             })}
-            {!pipeline.length&&<div style={{ color:"#444",fontSize:13,textAlign:"center",padding:"40px 0" }}>No deals in pipeline</div>}
+            {!pipeline.length&&<div style={{ color:"#b0a090",fontSize:13,textAlign:"center",padding:"40px 0" }}>No deals in pipeline</div>}
           </div>
         </>}
 
@@ -1390,7 +1406,7 @@ export default function CardVault() {
       {sm&&isAdmin&&<SupplierModal data={sm==="new"?null:sm} onClose={()=>setSm(null)} onSave={saveSupplier}/>}
       {tlm&&isAdmin&&<TimelineModal card={tlm} onClose={()=>setTlm(null)} onSave={saveTimeline}/>}
       {drawer&&<CardDrawer card={drawer} suppliers={suppliers} onClose={()=>setDrawer(null)} onEdit={()=>{if(isAdmin){setCm(drawer);setDrawer(null);}}} onDuplicate={()=>{if(isAdmin){duplicateCard(drawer);setDrawer(null);}}} onDelete={()=>{if(isAdmin){deleteCard(drawer.id);}}}/>}
-      {isAdmin&&!cm&&!sm&&!tlm&&!drawer&&<div style={{ position:"fixed", bottom:16, right:20, fontSize:10, color:"#333", fontFamily:"'IBM Plex Mono',monospace", pointerEvents:"none" }}>Press <span style={{color:"#555"}}>N</span> to add · <span style={{color:"#555"}}>Esc</span> to close</div>}
+      {isAdmin&&!cm&&!sm&&!tlm&&!drawer&&<div style={{ position:"fixed", bottom:16, right:20, fontSize:10, color:"#c0b0a0", fontFamily:"'IBM Plex Mono',monospace", pointerEvents:"none" }}>Press <span style={{color:"#9a8a78"}}>N</span> to add · <span style={{color:"#9a8a78"}}>Esc</span> to close</div>}
     </div>
   );
 }
